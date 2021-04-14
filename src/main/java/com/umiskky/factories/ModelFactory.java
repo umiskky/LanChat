@@ -1,7 +1,7 @@
 package com.umiskky.factories;
 
-import com.umiskky.model.DateModel;
-import com.umiskky.model.DateModelManager;
+import com.umiskky.model.DataModel;
+import com.umiskky.model.DataModelManager;
 
 /**
  * @author umiskky
@@ -10,12 +10,12 @@ import com.umiskky.model.DateModelManager;
  */
 public class ModelFactory {
 
-    private DateModel dateModel;
+    private DataModel dataModel;
 
-    public DateModel getDateModel(){
-        if(dateModel == null) {
-            dateModel = new DateModelManager();
+    public DataModel getDateModel(){
+        if(dataModel == null) {
+            dataModel = new DataModelManager();
         }
-        return dateModel;
+        return dataModel;
     }
 }

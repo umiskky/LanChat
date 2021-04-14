@@ -1,6 +1,6 @@
 package com.umiskky.viewmodel;
 
-import com.umiskky.model.DateModel;
+import com.umiskky.model.DataModel;
 
 /**
  * @author umiskky
@@ -9,10 +9,10 @@ import com.umiskky.model.DateModel;
  */
 public class ChatViewModel {
 
-    private DateModel dateModel;
+    private DataModel dataModel;
 
-    public ChatViewModel(DateModel dateModel) {
-        this.dateModel = dateModel;
+    public ChatViewModel(DataModel dataModel) {
+        this.dataModel = dataModel;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.umiskky.viewmodel;
 
-import com.umiskky.model.DateModel;
+import com.umiskky.model.DataModel;
 
 /**
  * @author umiskky
@@ -8,9 +8,9 @@ import com.umiskky.model.DateModel;
  * @date 2021/04/13
  */
 public class LoginViewModel {
-    private DateModel dateModel;
+    private DataModel dataModel;
 
-    public LoginViewModel(DateModel dateModel) {
-        this.dateModel = dateModel;
+    public LoginViewModel(DataModel dataModel) {
+        this.dataModel = dataModel;
     }
 }
