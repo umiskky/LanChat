@@ -53,4 +53,9 @@ public class HelloPacketTypeCode extends NamedNumber<Byte, HelloPacketTypeCode> 
     public int compareTo(HelloPacketTypeCode o) {
         return value().compareTo(o.value());
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

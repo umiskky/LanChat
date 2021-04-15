@@ -48,4 +48,9 @@ public class Uuid implements Serializable {
     public byte[] toByteArray(){
         return uuid.getBytes();
     }
+
+    @Override
+    public String toString() {
+        return "<" + uuid + ">";
+    }
 }

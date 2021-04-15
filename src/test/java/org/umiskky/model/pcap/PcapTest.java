@@ -64,6 +64,7 @@ public class PcapTest {
                 .paddingAtBuild(true);
 
         Packet packet = etherBuilder.build();
+        System.out.println(packet);
         PcapHandle sendHandle = null;
         try {
             sendHandle = nif.openLive(65536, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, 10);

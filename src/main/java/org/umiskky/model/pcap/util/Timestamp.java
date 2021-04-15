@@ -82,4 +82,8 @@ public class Timestamp implements Serializable {
         return instant.atZone(zoneId);
     }
 
+    @Override
+    public String toString() {
+        return this.getZonedDateTime().toString();
+    }
 }

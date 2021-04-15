@@ -36,4 +36,8 @@ public class AvatarId implements Serializable {
         return new AvatarId((byte) avatarId);
     }
 
+    @Override
+    public String toString() {
+        return "avatar-" + (int) avatarId;
+    }
 }

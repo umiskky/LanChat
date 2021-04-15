@@ -73,7 +73,6 @@ public final class HelloPacket extends AbstractPacket {
 
     /** Builder*/
     public static final class Builder extends AbstractBuilder {
-
         private HelloPacketTypeCode typeCode;
         private Uuid uuid;
         private Inet4Address serverAddress;
@@ -179,7 +178,7 @@ public final class HelloPacket extends AbstractPacket {
             }
 
             this.typeCode = HelloPacketTypeCode.getInstance(ByteArrays.getByte(rawData, TYPE_OFFSET + offset));
-            this.uuid = Uuid.getInstance(ByteArrays.getSubArray(rawData, TYPE_OFFSET + offset, SRC_UUID_SIZE));
+            this.uuid = Uuid.getInstance(ByteArrays.getSubArray(rawData, SRC_UUID_OFFSET + offset, SRC_UUID_SIZE));
             this.serverAddress = ByteArrays.getInet4Address(rawData, IP_ADDR_OFFSET + offset);
             this.serverPort = TcpPort.getInstance(ByteArrays.getShort(rawData, SOCKET_PORT_OFFSET + offset));;
             this.avatarId = AvatarId.getInstance(ByteArrays.getByte(rawData, AVATAR_ID_OFFSET + offset));
@@ -202,6 +201,21 @@ public final class HelloPacket extends AbstractPacket {
             rawFields.add(ByteArrays.toByteArray(serverPort.value()));
             rawFields.add(ByteArrays.toByteArray(avatarId.getAvatarId()));
             return rawFields;
+        }
+
+        @Override
+        protected String buildString() {
+            StringBuilder sb = new StringBuilder();
+            String ls = System.getProperty("line.separator");
+
+            sb.append("[HelloPacket Header (").append(length()).append(" bytes)]").append(ls);
+            sb.append("  Type: ").append(typeCode).append(ls);
+            sb.append("  Uuid: ").append(uuid).append(ls);
+            sb.append("  Server address: ").append(serverAddress).append(ls);
+            sb.append("  Server port: ").append(serverPort).append(ls);
+            sb.append("  Avatar id: ").append(avatarId).append(ls);
+
+            return sb.toString();
         }
 
         @Override

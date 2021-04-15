@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * @author umiskky
@@ -54,5 +55,10 @@ public class SymmetricEncryptionKey implements Serializable {
             return new SymmetricEncryptionKey(keyBytes);
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(key);
     }
 }

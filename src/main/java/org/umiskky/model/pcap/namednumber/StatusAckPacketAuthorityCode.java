@@ -57,4 +57,8 @@ public class StatusAckPacketAuthorityCode extends NamedNumber<Byte, StatusAckPac
         return value().compareTo(o.value());
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
