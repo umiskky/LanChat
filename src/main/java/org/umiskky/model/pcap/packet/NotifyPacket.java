@@ -112,6 +112,7 @@ public final class NotifyPacket extends AbstractPacket{
     /** Header*/
     public static final class NotifyHeader extends AbstractPacket.AbstractHeader {
 
+        @Serial
         private static final long serialVersionUID = 6197144485115529913L;
         private static final int SRC_UUID_OFFSET = 0;
         private static final int SRC_UUID_SIZE = 32;
