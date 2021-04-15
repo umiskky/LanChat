@@ -33,7 +33,7 @@ public class ViewHandler {
         FXMLLoader loader = new FXMLLoader();
         Parent root = null;
 
-        loader.setLocation(getClass().getResource("/com/umiskky/view/" + viewToOpen + "View.fxml"));
+        loader.setLocation(getClass().getResource("/org/umiskky/view/" + viewToOpen + "View.fxml"));
         root = loader.load();
         switch (viewToOpen){
             case "Login":

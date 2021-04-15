@@ -1,0 +1,83 @@
+/*左部分*/
+#left{
+    -fx-background-color: #7b7b7b;
+}
+/*设置按钮*/
+#settings
+{}
+#settings:hover,#settings:pressed
+{
+    -fx-background-color: #929292;
+    -fx-cursor: hand;
+}
+/*聊天选择*/
+#chatSelect
+{}
+#chatSelect:hover
+{
+    -fx-background-color: #929292;
+    -fx-cursor: hand;
+}
+/*好友选择*/
+#friendSelect
+{}
+#friendSelect:hover
+{
+    -fx-background-color: #929292;
+    -fx-cursor: hand;
+}
+
+/*中间部分*/
+/*搜索框*/
+#search
+{
+    -fx-background-position: 8px center;
+    -fx-background-radius: 20px;
+    -fx-background-color: white;
+    -fx-border-radius: 20px;
+    -fx-border-color: rgb(200,200,200);
+}
+
+/*好友列表*/
+#friendList
+{
+    -fx-background-color: transparent;
+}
+
+/*右部分*/
+/*退出*/
+#quit
+{
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-cursor: hand;
+}
+/*提交*/
+#submit
+{
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgba(255, 255, 255, 30);
+    -fx-border-color: #9c9c9c;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+}
+/*emoji*/
+#emoji
+{
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-cursor: hand;
+}
+/*file*/
+#file
+{
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-cursor: hand;
+}
+
+
