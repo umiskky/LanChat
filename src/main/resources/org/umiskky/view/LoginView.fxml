@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.umiskky.view.LoginViewController">
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="292.0" prefWidth="428.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.umiskky.view.LoginViewController">
    <children>
-      <JFXButton layoutX="226.0" layoutY="133.0" prefHeight="81.0" prefWidth="167.0" text="Test" />
+      <!--退出按钮-->
+      <Button fx:id="quit" id="quit" layoutX="383.0" layoutY="14.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+         <graphic>
+            <FontIcon iconLiteral="fas-times" iconSize="20" />
+         </graphic>
+      </Button>
+      <!--返回按钮-->
+      <Button fx:id="minimiser" id="minimiser" layoutX="338.0" layoutY="15.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+         <graphic>
+            <FontIcon iconLiteral="fas-window-minimize" iconSize="15" />
+         </graphic>
+      </Button>
+      <!--标题-->
+      <Label layoutX="33.0" layoutY="11.0" prefHeight="62.0" prefWidth="155.0" text="LANchat">
+         <font>
+            <Font name="Viner Hand ITC" size="30.0" />
+         </font>
+      </Label>
+      <!--头像展示-->
+      <Button id="HeadPortrait" layoutX="33.0" layoutY="79.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="125.0" />
+      <!--选择头像-->
+      <Button fx:id="chooseHead" id="ChooseHead" layoutX="64.0" layoutY="222.0" mnemonicParsing="false" text="选择头像" textFill="#f5f0f0">
+         <effect>
+            <DropShadow color="#0000009d" height="11.0" radius="5.0" width="11.0" />
+         </effect>
+      </Button>
+      <!--用户名-->
+      <TextField fx:id="account" id="account" layoutX="214.0" layoutY="79.0" prefHeight="30.0" prefWidth="155.0">
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+         <font>
+            <Font name="Trebuchet MS" size="15.0" />
+         </font>
+         <effect>
+            <InnerShadow color="#00000098" height="11.67" radius="5.335" width="11.67" />
+         </effect>
+      </TextField>
+      <!--空白-->
+      <Label layoutX="214.0" layoutY="109.0" prefHeight="23.0" prefWidth="155.0" />
+      <!--选择网卡-->
+<!--      <ChoiceBox fx:id="networkCardSelector" layoutX="214.0" layoutY="131.0" prefHeight="30.0" prefWidth="155.0">-->
+<!--      </ChoiceBox>-->
+      <!--登陆按钮-->
+      <Button fx:id="login" id="login" layoutX="266.0" layoutY="197.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+         <graphic>
+            <FontIcon iconLiteral="far-hand-point-right" iconSize="25" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
