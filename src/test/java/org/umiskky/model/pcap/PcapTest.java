@@ -1,5 +1,6 @@
 package org.umiskky.model.pcap;
 
+import cn.hutool.core.util.IdUtil;
 import org.junit.Test;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
@@ -9,10 +10,17 @@ import org.pcap4j.packet.EthernetPacket;
 import org.pcap4j.packet.Packet;
 import org.pcap4j.packet.UnknownPacket;
 import org.pcap4j.packet.namednumber.EtherType;
+import org.pcap4j.packet.namednumber.TcpPort;
 import org.pcap4j.util.MacAddress;
 import org.pcap4j.util.NifSelector;
+import org.umiskky.model.pcap.namednumber.HelloPacketTypeCode;
+import org.umiskky.model.pcap.packet.HelloPacket;
+import org.umiskky.model.pcap.util.AvatarId;
+import org.umiskky.model.pcap.util.Uuid;
 
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 
 /**
  * @author umiskky
@@ -21,7 +29,11 @@ import java.io.IOException;
  */
 public class PcapTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
+        EtherType etherType = new EtherType((short) 0xAAA0, "HELLO");
+        EtherType.register(etherType);
+
+
         PcapNetworkInterface nif;
         try {nif = new NifSelector().selectNetworkInterface();
         } catch (IOException e) {
@@ -33,18 +45,22 @@ public class PcapTest {
         }
         System.out.println(nif.getName() + "(" + nif.getDescription() + ")");
 
+        byte[] nickname = "umiskky".getBytes();
 
-        byte[] payload = new byte[1501];
-        for (int i = 0; i < payload.length; i++) {
-            payload[i] = (byte) i;
-        }
+        HelloPacket.Builder helloBuilder = new HelloPacket.Builder();
+        helloBuilder.avatarId(AvatarId.getAvatarIdByInt(1))
+                .serverAddress((Inet4Address) InetAddress.getByName("192.168.0.1"))
+                .serverPort(TcpPort.HELLO_PORT)
+                .uuid(Uuid.getUuidByString(IdUtil.simpleUUID()))
+                .typeCode(HelloPacketTypeCode.HELLO)
+                .payloadBuilder(new UnknownPacket.Builder().rawData(nickname));
 
         EthernetPacket.Builder etherBuilder = new EthernetPacket.Builder();
         etherBuilder
                 .dstAddr(MacAddress.ETHER_BROADCAST_ADDRESS)
                 .srcAddr(MacAddress.getByName("AA-AA-AA-AA-AA-AA"))
-                .type(EtherType.IPV4) // 帧类型
-                .payloadBuilder(new UnknownPacket.Builder().rawData(payload)) // 由于 ARP 请求是包含在帧里的, 故需要做一个 payload
+                .type(EtherType.getInstance((short) 0xAAA0)) // 帧类型
+                .payloadBuilder(helloBuilder) // 由于 ARP 请求是包含在帧里的, 故需要做一个 payload
                 .paddingAtBuild(true);
 
         Packet packet = etherBuilder.build();
@@ -63,7 +79,10 @@ public class PcapTest {
     }
 
     @Test
-    public void testPcap(){
-
+    public void TestPcap(){
+        EtherType etherType = new EtherType((short) 0xAAA0, "Hello");
+        EtherType.register(etherType);
+        System.out.println(EtherType.getInstance((short) 0xAAA0));
     }
+
 }

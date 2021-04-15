@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.pcap4j.packet.AbstractPacket;
 import org.pcap4j.packet.IllegalRawDataException;
 import org.pcap4j.packet.Packet;
+import org.pcap4j.packet.factory.PacketFactories;
+import org.pcap4j.packet.namednumber.NotApplicable;
 import org.pcap4j.packet.namednumber.TcpPort;
 import org.pcap4j.util.ByteArrays;
 import org.umiskky.model.pcap.namednumber.HelloPacketTypeCode;
@@ -30,11 +32,18 @@ public final class HelloPacket extends AbstractPacket {
 
     private HelloPacket(byte[] rawData, int offset, int length) throws IllegalRawDataException {
         this.header = new HelloPacket.HelloHeader(rawData, offset, length);
-        this.payload = ;
+        int payloadLength = length - header.length();
+        int payloadOffset = offset + header.length();
+        if(payloadLength > 0){
+            this.payload = (Packet)PacketFactories.getFactory(Packet.class, NotApplicable.class).newInstance(rawData, payloadOffset, payloadLength, new NotApplicable[]{NotApplicable.UNKNOWN});
+        }else{
+            this.payload = null;
+        }
     }
 
     private HelloPacket(HelloPacket.Builder builder) {
-
+        this.header = new HelloPacket.HelloHeader(builder);
+        this.payload = builder.payloadBuilder != null ? builder.payloadBuilder.build() : null;
     }
 
     public static HelloPacket newPacket(byte[] rawData, int offset, int length)
@@ -44,8 +53,18 @@ public final class HelloPacket extends AbstractPacket {
     }
 
     @Override
-    public Builder getBuilder() {
-        return new Builder(this);
+    public HelloPacket.HelloHeader getHeader() {
+        return header;
+    }
+
+    @Override
+    public Packet getPayload() {
+        return payload;
+    }
+
+    @Override
+    public HelloPacket.Builder getBuilder() {
+        return new HelloPacket.Builder(this);
     }
 
 
@@ -72,21 +91,45 @@ public final class HelloPacket extends AbstractPacket {
             this.payloadBuilder = packet.payload != null ? packet.payload.getBuilder() : null;
         }
 
-        /**
-         * @description The method typeCode is used to build typeCode
-         * @param typeCode
-         * @return org.umiskky.model.pcap.packet.HelloPacket.Builder
-         * @author umiskky
-         * @date 2021/4/15-14:49
-         */
         public HelloPacket.Builder typeCode(HelloPacketTypeCode typeCode) {
             this.typeCode = typeCode;
             return this;
         }
 
+        public HelloPacket.Builder uuid(Uuid uuid) {
+            this.uuid = uuid;
+            return this;
+        }
+
+        public HelloPacket.Builder serverAddress(Inet4Address serverAddress) {
+            this.serverAddress = serverAddress;
+            return this;
+        }
+
+        public HelloPacket.Builder serverPort(TcpPort serverPort) {
+            this.serverPort = serverPort;
+            return this;
+        }
+
+        public HelloPacket.Builder avatarId(AvatarId avatarId) {
+            this.avatarId = avatarId;
+            return this;
+        }
+
+        @Override
+        public HelloPacket.Builder payloadBuilder(Packet.Builder payloadBuilder) {
+            this.payloadBuilder = payloadBuilder;
+            return this;
+        }
+
+        @Override
+        public Packet.Builder getPayloadBuilder() {
+            return payloadBuilder;
+        }
+
         @Override
         public HelloPacket build() {
-            return null;
+            return new HelloPacket(this);
         }
     }
 
