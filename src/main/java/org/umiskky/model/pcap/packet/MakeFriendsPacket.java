@@ -127,16 +127,15 @@ public final class MakeFriendsPacket extends AbstractPacket{
 
         private MakeFriendsHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
             if (length < MAKE_FRIENDS_HEADER_SIZE) {
-                StringBuilder sb = new StringBuilder(100);
-                sb.append("The data is too short to build an MakeFriends header(")
-                        .append(MAKE_FRIENDS_HEADER_SIZE)
-                        .append(" bytes). data: ")
-                        .append(ByteArrays.toHexString(rawData, " "))
-                        .append(", offset: ")
-                        .append(offset)
-                        .append(", length: ")
-                        .append(length);
-                throw new IllegalRawDataException(sb.toString());
+                String sb = "The data is too short to build an MakeFriends header(" +
+                        MAKE_FRIENDS_HEADER_SIZE +
+                        " bytes). data: " +
+                        ByteArrays.toHexString(rawData, " ") +
+                        ", offset: " +
+                        offset +
+                        ", length: " +
+                        length;
+                throw new IllegalRawDataException(sb);
             }
             this.uuid = Uuid.getInstance(ByteArrays.getSubArray(rawData, SRC_UUID_OFFSET + offset, SRC_UUID_SIZE));
             this.key = SymmetricEncryptionKey.getInstance(ByteArrays.getSubArray(rawData, KEY_OFFSET + offset, KEY_SIZE));
@@ -149,7 +148,7 @@ public final class MakeFriendsPacket extends AbstractPacket{
 
         @Override
         protected List<byte[]> getRawFields() {
-            List<byte[]> rawFields = new ArrayList<byte[]>();
+            List<byte[]> rawFields = new ArrayList<>();
             rawFields.add(uuid.toByteArray());
             rawFields.add(key.getKey());
             return rawFields;

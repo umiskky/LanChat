@@ -128,16 +128,15 @@ public final class NotifyPacket extends AbstractPacket{
 
         private NotifyHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
             if (length < NOTIFY_HEADER_SIZE) {
-                StringBuilder sb = new StringBuilder(100);
-                sb.append("The data is too short to build an Notify header(")
-                        .append(NOTIFY_HEADER_SIZE)
-                        .append(" bytes). data: ")
-                        .append(ByteArrays.toHexString(rawData, " "))
-                        .append(", offset: ")
-                        .append(offset)
-                        .append(", length: ")
-                        .append(length);
-                throw new IllegalRawDataException(sb.toString());
+                String sb = "The data is too short to build an Notify header(" +
+                        NOTIFY_HEADER_SIZE +
+                        " bytes). data: " +
+                        ByteArrays.toHexString(rawData, " ") +
+                        ", offset: " +
+                        offset +
+                        ", length: " +
+                        length;
+                throw new IllegalRawDataException(sb);
             }
             this.uuid = Uuid.getInstance(ByteArrays.getSubArray(rawData, SRC_UUID_OFFSET + offset, SRC_UUID_SIZE));
             this.timestamp = Timestamp.getInstance(ByteArrays.getLong(rawData, TIMESTAMP_OFFSET + offset));
@@ -150,7 +149,7 @@ public final class NotifyPacket extends AbstractPacket{
 
         @Override
         protected List<byte[]> getRawFields() {
-            List<byte[]> rawFields = new ArrayList<byte[]>();
+            List<byte[]> rawFields = new ArrayList<>();
             rawFields.add(uuid.toByteArray());
             rawFields.add(ByteArrays.toByteArray(timestamp.getTimestamp()));
             return rawFields;

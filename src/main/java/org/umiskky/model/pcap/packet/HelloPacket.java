@@ -165,22 +165,21 @@ public final class HelloPacket extends AbstractPacket {
 
         private HelloHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
             if (length < HELLO_HEADER_SIZE) {
-                StringBuilder sb = new StringBuilder(100);
-                sb.append("The data is too short to build an Hello header(")
-                        .append(HELLO_HEADER_SIZE)
-                        .append(" bytes). data: ")
-                        .append(ByteArrays.toHexString(rawData, " "))
-                        .append(", offset: ")
-                        .append(offset)
-                        .append(", length: ")
-                        .append(length);
-                throw new IllegalRawDataException(sb.toString());
+                String sb = "The data is too short to build an Hello header(" +
+                        HELLO_HEADER_SIZE +
+                        " bytes). data: " +
+                        ByteArrays.toHexString(rawData, " ") +
+                        ", offset: " +
+                        offset +
+                        ", length: " +
+                        length;
+                throw new IllegalRawDataException(sb);
             }
 
             this.typeCode = HelloPacketTypeCode.getInstance(ByteArrays.getByte(rawData, TYPE_OFFSET + offset));
             this.uuid = Uuid.getInstance(ByteArrays.getSubArray(rawData, SRC_UUID_OFFSET + offset, SRC_UUID_SIZE));
             this.serverAddress = ByteArrays.getInet4Address(rawData, IP_ADDR_OFFSET + offset);
-            this.serverPort = TcpPort.getInstance(ByteArrays.getShort(rawData, SOCKET_PORT_OFFSET + offset));;
+            this.serverPort = TcpPort.getInstance(ByteArrays.getShort(rawData, SOCKET_PORT_OFFSET + offset));
             this.avatarId = AvatarId.getInstance(ByteArrays.getByte(rawData, AVATAR_ID_OFFSET + offset));
         }
 
@@ -194,7 +193,7 @@ public final class HelloPacket extends AbstractPacket {
 
         @Override
         protected List<byte[]> getRawFields() {
-            List<byte[]> rawFields = new ArrayList<byte[]>();
+            List<byte[]> rawFields = new ArrayList<>();
             rawFields.add(ByteArrays.toByteArray(typeCode.value()));
             rawFields.add(uuid.toByteArray());
             rawFields.add(ByteArrays.toByteArray(serverAddress));
