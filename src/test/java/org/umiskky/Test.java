@@ -15,6 +15,6 @@ public class Test {
     @org.junit.Test
     public void test(){
         byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
-        log.info(String.valueOf(key));
+        System.out.println(String.valueOf(key));
     }
 }

@@ -2,6 +2,7 @@ package org.umiskky.model.pcap.util;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @date 2021/04/15
  */
 public class AvatarId implements Serializable {
+    @Serial
     private static final long serialVersionUID = 2969123136096673382L;
 
     @Getter
@@ -19,16 +21,19 @@ public class AvatarId implements Serializable {
         this.avatarId = avatarId;
     }
 
-    public static AvatarId getAvatarIdByByte(byte avatarId) {
+    /**
+     * @description The method getInstance is used to get an object of Class AvatarId.
+     * @param avatarId
+     * @return org.umiskky.model.pcap.util.AvatarId
+     * @author umiskky
+     * @date 2021/4/15-22:21
+     */
+    public static AvatarId getInstance(byte avatarId) {
         return new AvatarId(avatarId);
     }
 
-    public static AvatarId getAvatarIdByInt(Integer avatarId) {
-        return new AvatarId(avatarId.byteValue());
-    }
-
-    public  Integer toInt(){
-        return Integer.parseInt(String.valueOf(this.avatarId));
+    public static AvatarId getInstance(int avatarId) {
+        return new AvatarId((byte) avatarId);
     }
 
 }

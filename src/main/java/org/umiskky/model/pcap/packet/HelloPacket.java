@@ -12,6 +12,7 @@ import org.umiskky.model.pcap.namednumber.HelloPacketTypeCode;
 import org.umiskky.model.pcap.util.AvatarId;
 import org.umiskky.model.pcap.util.Uuid;
 
+import java.io.Serial;
 import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import static org.pcap4j.util.ByteArrays.*;
  */
 public final class HelloPacket extends AbstractPacket {
 
+    @Serial
     private static final long serialVersionUID = 8098262229970686414L;
 
     private final HelloPacket.HelloHeader header;
@@ -136,6 +138,7 @@ public final class HelloPacket extends AbstractPacket {
     /** Header*/
     public static final class HelloHeader extends AbstractHeader{
 
+        @Serial
         private static final long serialVersionUID = 1540218131071336544L;
         private static final int TYPE_OFFSET = 0;
         private static final int TYPE_SIZE = BYTE_SIZE_IN_BYTES;
@@ -176,10 +179,10 @@ public final class HelloPacket extends AbstractPacket {
             }
 
             this.typeCode = HelloPacketTypeCode.getInstance(ByteArrays.getByte(rawData, TYPE_OFFSET + offset));
-            this.uuid = Uuid.getUuidByByte(ByteArrays.getSubArray(rawData, TYPE_OFFSET + offset, SRC_UUID_SIZE));
+            this.uuid = Uuid.getInstance(ByteArrays.getSubArray(rawData, TYPE_OFFSET + offset, SRC_UUID_SIZE));
             this.serverAddress = ByteArrays.getInet4Address(rawData, IP_ADDR_OFFSET + offset);
             this.serverPort = TcpPort.getInstance(ByteArrays.getShort(rawData, SOCKET_PORT_OFFSET + offset));;
-            this.avatarId = AvatarId.getAvatarIdByByte(ByteArrays.getByte(rawData, AVATAR_ID_OFFSET + offset));
+            this.avatarId = AvatarId.getInstance(ByteArrays.getByte(rawData, AVATAR_ID_OFFSET + offset));
         }
 
         private HelloHeader(HelloPacket.Builder builder) {
@@ -194,7 +197,7 @@ public final class HelloPacket extends AbstractPacket {
         protected List<byte[]> getRawFields() {
             List<byte[]> rawFields = new ArrayList<byte[]>();
             rawFields.add(ByteArrays.toByteArray(typeCode.value()));
-            rawFields.add(uuid.getUuid());
+            rawFields.add(uuid.toByteArray());
             rawFields.add(ByteArrays.toByteArray(serverAddress));
             rawFields.add(ByteArrays.toByteArray(serverPort.value()));
             rawFields.add(ByteArrays.toByteArray(avatarId.getAvatarId()));

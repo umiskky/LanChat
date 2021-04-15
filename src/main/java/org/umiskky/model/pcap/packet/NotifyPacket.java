@@ -9,7 +9,7 @@ import java.util.List;
  * @version 0.0.1
  * @date 2021/04/15
  */
-public class NotifyPacket extends AbstractPacket{
+public final class NotifyPacket extends AbstractPacket{
 
     private static final long serialVersionUID = -8360211549901651033L;
 
@@ -29,6 +29,10 @@ public class NotifyPacket extends AbstractPacket{
     }
 
     public static final class NotifyHeader extends AbstractPacket.AbstractHeader {
+
+        private static final long serialVersionUID = 6197144485115529913L;
+        private static final int SRC_UUID_OFFSET = 0;
+        private static final int SRC_UUID_SIZE = 32;
 
         @Override
         protected List<byte[]> getRawFields() {

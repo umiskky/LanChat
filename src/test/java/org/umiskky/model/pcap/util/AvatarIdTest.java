@@ -11,6 +11,6 @@ public class AvatarIdTest {
     @Test
     public void testAvatarId(){
         AvatarId test = new AvatarId((byte)1);
-        System.out.println(test.toInt());
+        System.out.println(test.getAvatarId());
     }
 }

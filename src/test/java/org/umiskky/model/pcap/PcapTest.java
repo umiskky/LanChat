@@ -48,10 +48,10 @@ public class PcapTest {
         byte[] nickname = "umiskky".getBytes();
 
         HelloPacket.Builder helloBuilder = new HelloPacket.Builder();
-        helloBuilder.avatarId(AvatarId.getAvatarIdByInt(1))
+        helloBuilder.avatarId(AvatarId.getInstance(1))
                 .serverAddress((Inet4Address) InetAddress.getByName("192.168.0.1"))
                 .serverPort(TcpPort.HELLO_PORT)
-                .uuid(Uuid.getUuidByString(IdUtil.simpleUUID()))
+                .uuid(Uuid.getInstance(IdUtil.simpleUUID()))
                 .typeCode(HelloPacketTypeCode.HELLO)
                 .payloadBuilder(new UnknownPacket.Builder().rawData(nickname));
 
