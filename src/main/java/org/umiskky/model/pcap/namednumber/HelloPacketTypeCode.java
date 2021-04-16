@@ -2,6 +2,7 @@ package org.umiskky.model.pcap.namednumber;
 
 import org.pcap4j.packet.namednumber.NamedNumber;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ public class HelloPacketTypeCode extends NamedNumber<Byte, HelloPacketTypeCode> 
     public static final HelloPacketTypeCode HELLOREPLY
             = new HelloPacketTypeCode((byte)3, "HelloReply");
 
+    @Serial
     private static final long serialVersionUID = -6536822926297795147L;
     private static final Map<Byte, HelloPacketTypeCode> registry
             = new HashMap<>();

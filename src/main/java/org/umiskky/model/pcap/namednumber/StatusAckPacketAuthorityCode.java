@@ -2,6 +2,7 @@ package org.umiskky.model.pcap.namednumber;
 
 import org.pcap4j.packet.namednumber.NamedNumber;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class StatusAckPacketAuthorityCode extends NamedNumber<Byte, StatusAckPac
     public static final StatusAckPacketAuthorityCode GROUP_REJECT
             = new StatusAckPacketAuthorityCode((byte)3, "GroupReject");
 
+    @Serial
     private static final long serialVersionUID = 281628009168287561L;
     private static final Map<Byte, StatusAckPacketAuthorityCode> registry
             = new HashMap<>();

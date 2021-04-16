@@ -167,6 +167,7 @@ public class InviteToGroupPacket extends AbstractPacket{
             rawFields.add(key.getKey());
             return rawFields;
         }
+
         @Override
         protected String buildString() {
             StringBuilder sb = new StringBuilder();
