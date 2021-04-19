@@ -1,0 +1,303 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:1930523798950862043",
+      "lastPropertyId": "8:1693053940273707447",
+      "name": "GroupMember",
+      "properties": [
+        {
+          "id": "1:8688055357503978717",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6303021396447342666",
+          "name": "uuid",
+          "indexId": "1:3215962473664455262",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "3:8098148302909506305",
+          "name": "nickname",
+          "type": 9
+        },
+        {
+          "id": "4:4742658999090303739",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "5:7317740931723777004",
+          "name": "ipAddress",
+          "type": 9
+        },
+        {
+          "id": "6:6928393602130700524",
+          "name": "serverPort",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "7:6827004654226005414",
+          "name": "status",
+          "type": 1,
+          "flags": 2
+        },
+        {
+          "id": "8:1693053940273707447",
+          "name": "lastUpdated",
+          "type": 6,
+          "flags": 4
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3074620571013937065",
+      "lastPropertyId": "9:4542565534434600638",
+      "name": "Friend",
+      "properties": [
+        {
+          "id": "1:5616563055326558734",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8418647546994747384",
+          "name": "uuid",
+          "indexId": "2:9164713741910834139",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "3:3486323541261340164",
+          "name": "nickname",
+          "type": 9
+        },
+        {
+          "id": "4:5642534239045184797",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "5:6851248998693024996",
+          "name": "ipAddress",
+          "type": 9
+        },
+        {
+          "id": "6:5516324478558060043",
+          "name": "serverPort",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "7:8236305227278410125",
+          "name": "key",
+          "type": 23
+        },
+        {
+          "id": "8:740117478849824226",
+          "name": "status",
+          "type": 1,
+          "flags": 2
+        },
+        {
+          "id": "9:4542565534434600638",
+          "name": "lastUpdated",
+          "type": 6,
+          "flags": 4
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:1070507367347222619",
+      "lastPropertyId": "5:2749838896946465397",
+      "name": "Group",
+      "properties": [
+        {
+          "id": "1:8495748546953442195",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8467286369669961705",
+          "name": "uuid",
+          "indexId": "3:4167958077164694956",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "3:5672559312160249133",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:5565260749276685736",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "5:2749838896946465397",
+          "name": "key",
+          "type": 23
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:488329537255721297",
+          "name": "groupMembers",
+          "targetId": "1:1930523798950862043"
+        }
+      ]
+    },
+    {
+      "id": "4:6228240991262917850",
+      "lastPropertyId": "7:6134373836795825749",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:2443822329504882199",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8507686473610817771",
+          "name": "uuid",
+          "indexId": "4:6648765815941899482",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "3:3840327708400526408",
+          "name": "nickname",
+          "type": 9
+        },
+        {
+          "id": "4:1315731043932923994",
+          "name": "ipAddress",
+          "type": 9
+        },
+        {
+          "id": "5:1464829261083888441",
+          "name": "serverPort",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "6:8949292378993048327",
+          "name": "status",
+          "type": 1,
+          "flags": 2
+        },
+        {
+          "id": "7:6134373836795825749",
+          "name": "lastUpdated",
+          "type": 6,
+          "flags": 4
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:3463635931384360667",
+      "lastPropertyId": "6:3706533888561236813",
+      "name": "LocalUser",
+      "properties": [
+        {
+          "id": "1:1048891188777423778",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7939665391951267513",
+          "name": "uuid",
+          "indexId": "5:826068270987164027",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "3:755537962080783819",
+          "name": "nickname",
+          "type": 9
+        },
+        {
+          "id": "4:848824356315580317",
+          "name": "ipAddress",
+          "type": 9
+        },
+        {
+          "id": "5:9134922282375243239",
+          "name": "serverPort",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "6:3706533888561236813",
+          "name": "key",
+          "type": 23
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:5064245447560160086",
+      "lastPropertyId": "5:6859186742670250413",
+      "name": "Message",
+      "properties": [
+        {
+          "id": "1:1791958853537501579",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5972811078300996045",
+          "name": "fromUuid",
+          "indexId": "6:8399783114193093808",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "3:5711677230374060408",
+          "name": "toUuid",
+          "indexId": "7:2553099241446317544",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "4:2749181041651794437",
+          "name": "sendTime",
+          "type": 6,
+          "flags": 4
+        },
+        {
+          "id": "5:6859186742670250413",
+          "name": "message",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "6:5064245447560160086",
+  "lastIndexId": "7:2553099241446317544",
+  "lastRelationId": "1:488329537255721297",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

@@ -1,15 +1,16 @@
 package org.umiskky.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.slf4j.Logger;
 
 /**
  * @author umiskky
  * @version 0.0.1
  * @date 2021/04/14
  */
-@Slf4j
 public class ConfigParse {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ConfigParse.class);
 
     /**
      * @description The method configParseInit is used to set system properties and relocate the path of config files.
@@ -20,14 +21,13 @@ public class ConfigParse {
      */
     public static void configParseInit(){
 
-
         String log4j2Path = ConfigParse.class.getResource("log4j2.xml").getPath();
         String packetFactoryPath = ConfigParse.class.getResource("packet-factory.properties").getPath();
 
         System.setProperty("log4j2.configurationFile", log4j2Path);
         System.setProperty("org.pcap4j.packet.factory.properties", packetFactoryPath);
         Configurator.initialize("log4j2.xml", ConfigParse.class.getClassLoader(), log4j2Path);
-        log.info("Relocate config files!");
+        log.info("Relocate config files.");
     }
 
 }

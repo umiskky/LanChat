@@ -1,10 +1,10 @@
 package org.umiskky.view;
 
-import org.umiskky.viewmodel.LoginViewModel;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import org.umiskky.viewmodel.LoginViewModel;
 
 
 /**

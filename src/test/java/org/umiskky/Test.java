@@ -1,20 +1,19 @@
 package org.umiskky;
 
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.umiskky.service.task.InitTask;
 
 /**
  * @author umiskky
  * @version 0.0.1
  * @date 2021/04/14
  */
-@Slf4j
 public class Test {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Test.class);
 
     @org.junit.Test
     public void test(){
-        byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
-        System.out.println(String.valueOf(key));
+        System.out.println(InitTask.class.getResource("/").getPath());
     }
 }

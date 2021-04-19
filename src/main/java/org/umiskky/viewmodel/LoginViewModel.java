@@ -1,9 +1,9 @@
 package org.umiskky.viewmodel;
 
-import org.umiskky.model.DataModel;
 import javafx.beans.property.StringProperty;
 import lombok.Getter;
-import lombok.Setter;
+import org.umiskky.model.DataModel;
+
 /**
  * @author umiskky
  * @version 0.0.1
