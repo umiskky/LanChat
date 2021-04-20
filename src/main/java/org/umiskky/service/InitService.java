@@ -17,5 +17,6 @@ public class InitService {
         InitTask.initDatabase();
         InitTask.cleanDatabase();
         InitTask.initNetworkCards();
+        InitTask.initEthernetTypeCode();
     }
 }

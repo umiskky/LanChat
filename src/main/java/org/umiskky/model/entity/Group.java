@@ -20,17 +20,27 @@ public class Group {
     private byte[] key;
     @Index
     private String uuid;
+    private int avatarId;
     public ToMany<GroupMember> groupMembers;
 
     public Group() {
     }
 
-    public Group(long id, String uuid, String name, String icon, byte[] key) {
+    public Group(long id, String name, String icon, byte[] key, String uuid, int avatarId) {
         this.id = id;
-        this.uuid = uuid;
         this.name = name;
         this.icon = icon;
         this.key = key;
+        this.uuid = uuid;
+        this.avatarId = avatarId;
+    }
+
+    public int getAvatarId() {
+        return avatarId;
+    }
+
+    public void setAvatarId(int avatarId) {
+        this.avatarId = avatarId;
     }
 
     public long getId() {

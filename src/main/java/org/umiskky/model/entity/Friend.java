@@ -20,6 +20,8 @@ public class Friend {
 
     private String icon;
 
+    private int avatarId;
+
     private String ipAddress;
 
     private int serverPort;
@@ -33,16 +35,25 @@ public class Friend {
     public Friend() {
     }
 
-    public Friend(long id, String uuid, String nickname, String icon, String ipAddress, int serverPort, byte[] key, Boolean status, long lastUpdated) {
+    public Friend(long id, String uuid, String nickname, String icon, int avatarId, String ipAddress, int serverPort, byte[] key, Boolean status, long lastUpdated) {
         this.id = id;
         this.uuid = uuid;
         this.nickname = nickname;
         this.icon = icon;
+        this.avatarId = avatarId;
         this.ipAddress = ipAddress;
         this.serverPort = serverPort;
         this.key = key;
         this.status = status;
         this.lastUpdated = lastUpdated;
+    }
+
+    public int getAvatarId() {
+        return avatarId;
+    }
+
+    public void setAvatarId(int avatarId) {
+        this.avatarId = avatarId;
     }
 
     public long getId() {

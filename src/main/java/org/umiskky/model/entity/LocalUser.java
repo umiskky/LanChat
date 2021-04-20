@@ -18,17 +18,19 @@ public class LocalUser{
     private String nickname;
     private String ipAddress;
     private int serverPort;
+    private int avatarId;
     private byte[] key;
 
     public LocalUser() {
     }
 
-    public LocalUser(long id, String uuid, String nickname, String ipAddress, int serverPort, byte[] key) {
+    public LocalUser(long id, String uuid, String nickname, String ipAddress, int serverPort, int avatarId, byte[] key) {
         this.id = id;
         this.uuid = uuid;
         this.nickname = nickname;
         this.ipAddress = ipAddress;
         this.serverPort = serverPort;
+        this.avatarId = avatarId;
         this.key = key;
     }
 
@@ -78,5 +80,13 @@ public class LocalUser{
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getAvatarId() {
+        return avatarId;
+    }
+
+    public void setAvatarId(int avatarId) {
+        this.avatarId = avatarId;
     }
 }

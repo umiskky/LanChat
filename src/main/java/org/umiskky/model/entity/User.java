@@ -18,20 +18,30 @@ public class User {
     private String nickname;
     private String ipAddress;
     private int serverPort;
+    private int avatarId;
     private Boolean status;
     private long lastUpdated;
 
     public User() {
     }
 
-    public User(long id, String uuid, String nickname, String ipAddress, int serverPort, Boolean status, long lastUpdated) {
+    public User(long id, String uuid, String nickname, String ipAddress, int serverPort, int avatarId, Boolean status, long lastUpdated) {
         this.id = id;
         this.uuid = uuid;
         this.nickname = nickname;
         this.ipAddress = ipAddress;
         this.serverPort = serverPort;
+        this.avatarId = avatarId;
         this.status = status;
         this.lastUpdated = lastUpdated;
+    }
+
+    public int getAvatarId() {
+        return avatarId;
+    }
+
+    public void setAvatarId(int avatarId) {
+        this.avatarId = avatarId;
     }
 
     public long getId() {
