@@ -6,7 +6,7 @@
     -fx-border-radius: 100px;
     -fx-background-size: 125px 125px;
     -fx-background-color:transparent;
-    -fx-background-image: url("Image/head/1.jpg");
+    /*-fx-background-image: url("Image/head/1.jpg");*/
     -fx-background-position: center center;
 }
 #ChooseHead

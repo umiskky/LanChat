@@ -1,8 +1,10 @@
 package org.umiskky.view;
 
-import org.umiskky.viewmodel.LoginViewModel;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import org.umiskky.viewmodel.LoginViewModel;
 
 /**
  * @author umiskky
@@ -11,7 +13,7 @@ import javafx.scene.control.*;
  */
 public class LoginViewController {
     private LoginViewModel loginViewModel;
-    private static String headid = "1";
+    public static String headid;
 
     @FXML
     private Button quit;
@@ -37,6 +39,8 @@ public class LoginViewController {
         this.loginViewModel = loginViewModel;
         //networkCardSelectorInit();
         //tableInit();
+        headid = "0";
+        headPortrait.setStyle(String.format("-fx-background-image: url('org/umiskky/view/Image/head/%s.jpg')",headid));
         bindInit();
         addListener();
     }
@@ -77,6 +81,34 @@ public class LoginViewController {
     public String choose(){
         headid = Integer.toString((Integer.parseInt(headid) + 1) % 10);
         return headid;
+    }
+
+    public LoginViewModel getLoginViewModel() {
+        return this.loginViewModel;
+    }
+
+    public Button getQuit() {
+        return this.quit;
+    }
+
+    public Button getMinimiser() {
+        return this.minimiser;
+    }
+
+    public Button getHeadPortrait() {
+        return this.headPortrait;
+    }
+
+    public Button getChooseHead() {
+        return this.chooseHead;
+    }
+
+    public TextField getAccount() {
+        return this.account;
+    }
+
+    public Button getLogin() {
+        return this.login;
     }
 
     //public void networkCardSelectorInit(){

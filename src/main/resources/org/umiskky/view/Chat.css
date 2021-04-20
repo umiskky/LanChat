@@ -1,6 +1,19 @@
 /*左部分*/
-#left{
+#left
+{
     -fx-background-color: #7b7b7b;
+}
+/*头像*/
+#headPortraitChat
+{
+    -fx-border-width: 1px;
+    -fx-border-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-size: 40px 40px;
+    -fx-background-color:transparent;
+    -fx-background-position: center center;
+    -fx-background-image: url("org/umiskky/view/Image/head/1.jpg");
 }
 /*设置按钮*/
 #settings

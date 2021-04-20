@@ -15,4 +15,16 @@ public class ChatViewModel {
         this.dataModel = dataModel;
     }
 
+    public static void quit(){
+        System.exit(0);
+    }
+
+    public static void switchSC(){
+
+    }
+
+    public static void switchSF(){
+
+    }
+
 }

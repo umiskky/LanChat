@@ -1,26 +1,29 @@
 package org.umiskky.viewmodel;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.umiskky.factories.ViewHandler;
+import org.umiskky.factories.ViewModelFactory;
 import org.umiskky.model.DataModel;
-import javafx.scene.control.*;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleStringProperty;
-import lombok.Getter;
+import org.umiskky.view.ChatViewController;
 
 import java.io.IOException;
 import java.util.Objects;
+
+import static cn.hutool.core.util.URLUtil.url;
 
 /**
  * @author umiskky
  * @version 0.0.1
  * @date 2021/04/13
  */
-@Getter
 public class LoginViewModel {
-
+    private static ViewModelFactory viewModelFactory1;
     private DataModel dataModel;
     private StringProperty account;
     private Button headPortrait;
@@ -30,7 +33,8 @@ public class LoginViewModel {
      * @apiNote Learned from umiskky:create a new object for the properties that will be bind
      *          preventing from facing the NonPionterException!!!
      */
-    public LoginViewModel(DataModel dataModel) {
+    public LoginViewModel(DataModel dataModel,ViewModelFactory viewModelFactory) {
+        viewModelFactory1 = viewModelFactory;
         this.dataModel = dataModel;
         vmPropertiesInit();
     }
@@ -73,7 +77,11 @@ public class LoginViewModel {
      */
     public static void login(Button login){
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(LoginViewModel.class.getResource("/org/umiskky/view/ChatView.fxml")));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(LoginViewModel.class.getResource("/org/umiskky/view/" + "ChatView.fxml"));
+            Parent root = loader.load();
+            ChatViewController chatViewController = loader.getController();
+            chatViewController.init(viewModelFactory1.getChatViewModel());
             Stage chat = new Stage();
             chat.setTitle("LANChat");
             Scene scene = new Scene(root);
@@ -86,4 +94,15 @@ public class LoginViewModel {
         }
     }
 
+    public DataModel getDataModel() {
+        return this.dataModel;
+    }
+
+    public StringProperty getAccount() {
+        return this.account;
+    }
+
+    public Button getHeadPortrait() {
+        return this.headPortrait;
+    }
 }

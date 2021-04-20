@@ -16,7 +16,7 @@ public class ViewModelFactory {
 
     public ViewModelFactory(ModelFactory modelFactory){
         chatViewModel = new ChatViewModel(modelFactory.getDateModel());
-        loginViewModel = new LoginViewModel(modelFactory.getDateModel());
+        loginViewModel = new LoginViewModel(modelFactory.getDateModel(),ViewModelFactory.this);
     }
 
     public ChatViewModel getChatViewModel() {

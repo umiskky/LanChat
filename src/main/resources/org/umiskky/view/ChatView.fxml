@@ -20,18 +20,18 @@
             <VBox id="left" prefHeight="600.0" prefWidth="60.0">
                <children>
                    <HBox prefHeight="60.0" prefWidth="60.0">
-                       <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+                       <Button fx:id="headPortraitChat" id="headPortraitChat" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
                         <HBox.margin>
                            <Insets left="10.0" top="10.0" />
                         </HBox.margin>
                        </Button>
                    </HBox>
-                  <HBox id="chatSelect" alignment="CENTER" prefHeight="40.0" prefWidth="60.0">
+                  <HBox fx:id="chatSelect" id="chatSelect" alignment="CENTER" prefHeight="40.0" prefWidth="60.0">
                      <children>
                         <FontIcon iconColor="FLORALWHITE" iconLiteral="fas-comment" iconSize="20" />
                      </children>
                   </HBox>
-                  <HBox id="friendSelect" alignment="CENTER" prefHeight="40.0" prefWidth="60.0">
+                  <HBox fx:id="friendSelect" id="friendSelect" alignment="CENTER" prefHeight="40.0" prefWidth="60.0">
                      <children>
                         <FontIcon iconColor="FLORALWHITE" iconLiteral="fas-user-friends" iconSize="20" />
                      </children>
@@ -89,7 +89,7 @@
                         </VBox>
                      </children></HBox>
                    <VBox alignment="TOP_CENTER" prefHeight="525.0" prefWidth="220.0">
-                       <ListView id="friendList" prefHeight="525.0" prefWidth="220.0">
+                       <ListView fx:id="friendList" id="friendList" prefHeight="525.0" prefWidth="220.0">
 
                        </ListView>
                    </VBox>
@@ -101,7 +101,7 @@
                      <children>
                         <HBox prefHeight="25.0" prefWidth="25.0" />
                          <HBox prefHeight="25.0" prefWidth="25.0">
-                             <Button id="quit" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+                             <Button fx:id="quit" id="quit" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
                                  <graphic>
                                      <FontIcon iconLiteral="fas-times" iconSize="20" />
                                  </graphic>
@@ -127,8 +127,11 @@
                    </HBox>
                   <HBox prefHeight="350.0" prefWidth="620.0">
                      <children>
-                        <ListView prefHeight="350.0" prefWidth="620.0" />
-                     </children></HBox>
+                         <ListView fx:id="chatList" prefHeight="350.0" prefWidth="620.0">
+
+                         </ListView>
+                     </children>
+                  </HBox>
                   <HBox prefHeight="35.0" prefWidth="620.0">
                      <children>
                         <HBox prefHeight="34.0" prefWidth="34.0">
