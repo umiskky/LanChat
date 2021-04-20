@@ -1,6 +1,9 @@
 package org.umiskky.view;
 
+import javafx.fxml.FXML;
 import org.umiskky.viewmodel.ChatViewModel;
+
+import javax.swing.text.html.ListView;
 
 /**
  * @author umiskky
@@ -9,6 +12,9 @@ import org.umiskky.viewmodel.ChatViewModel;
  */
 public class ChatViewController {
     private ChatViewModel chatViewModel;
+
+    @FXML
+    private ListView friendList;
 
     public void init(ChatViewModel chatViewModel) {
         this.chatViewModel = chatViewModel;

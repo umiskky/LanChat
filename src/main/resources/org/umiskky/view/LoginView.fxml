@@ -32,9 +32,10 @@
          </font>
       </Label>
       <!--头像展示-->
-      <Button id="HeadPortrait" layoutX="33.0" layoutY="79.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="125.0" />
+      <Button fx:id="headPortrait" id="HeadPortrait" layoutX="33.0" layoutY="79.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="125.0" />
       <!--选择头像-->
       <Button fx:id="chooseHead" id="ChooseHead" layoutX="64.0" layoutY="222.0" mnemonicParsing="false" text="选择头像" textFill="#f5f0f0">
+
          <effect>
             <DropShadow color="#0000009d" height="11.0" radius="5.0" width="11.0" />
          </effect>
