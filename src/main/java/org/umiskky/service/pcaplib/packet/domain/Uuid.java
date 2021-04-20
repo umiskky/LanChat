@@ -1,5 +1,7 @@
 package org.umiskky.service.pcaplib.packet.domain;
 
+import cn.hutool.core.util.StrUtil;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -15,6 +17,8 @@ public class Uuid implements Serializable {
     private static final long serialVersionUID = 7000124657951990508L;
 
     private final String uuid;
+
+    public static Uuid invalidUuid = new Uuid(StrUtil.repeatByLength("F", 32));
 
     protected Uuid(String uuid) {
         this.uuid = uuid;

@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import io.objectbox.BoxStore;
+import org.pcap4j.packet.namednumber.EtherType;
 import org.slf4j.Logger;
 import org.umiskky.config.ConfigParse;
 import org.umiskky.model.dao.FriendDAO;
@@ -93,5 +94,29 @@ public class InitTask {
      */
     public static void initNetworkCards(){
         networkCardHashMap = PcapNetworkCard.getAllNetworkCards();
+    }
+
+    /**
+     * @description The method initEthernetTypeCode is used to init Ethernet type code.
+     * @param
+     * @return void
+     * @author umiskky
+     * @date 2021/4/20-16:45
+     */
+    public static void initEthernetTypeCode() {
+        EtherType helloEtherType = new EtherType((short) 0xAAA0, "HELLO");
+        EtherType.register(helloEtherType);
+
+        EtherType makeFriendsEtherType = new EtherType((short) 0xAAA1, "MAKE_FRIENDS");
+        EtherType.register(makeFriendsEtherType);
+
+        EtherType statusAckEtherType = new EtherType((short) 0xAAA2, "STATUS_ACK");
+        EtherType.register(statusAckEtherType);
+
+        EtherType inviteToGroupEtherType = new EtherType((short) 0xAAA3, "INVITE_TO_GROUP");
+        EtherType.register(inviteToGroupEtherType);
+
+        EtherType notifyEtherType = new EtherType((short) 0xAAA4, "NOTIFY");
+        EtherType.register(notifyEtherType);
     }
 }
