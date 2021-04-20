@@ -1,4 +1,4 @@
-package org.umiskky.service.pcap.networkcards;
+package org.umiskky.service.pcaplib.networkcards;
 
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;

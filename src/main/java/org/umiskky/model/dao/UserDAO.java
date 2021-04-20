@@ -23,7 +23,7 @@ public interface UserDAO {
      * @author umiskky
      * @date 2021/4/19-19:18
      */
-    public static void removeAll(){
+    static void removeAll(){
         userBox.removeAll();
         log.info("Database Handle: Remove all users!");
     };
@@ -35,7 +35,7 @@ public interface UserDAO {
      * @author umiskky
      * @date 2021/4/19-19:35
      */
-    public static void resetStatus(){
+    static void resetStatus(){
         List<User> userList = userBox.getAll();
         if(userList.size() != 0){
             for(User user : userList){

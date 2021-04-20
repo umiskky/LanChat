@@ -24,7 +24,7 @@ public interface GroupMemberDAO {
      * @author umiskky
      * @date 2021/4/19-20:02
      */
-    public static void resetStatus(){
+    static void resetStatus(){
         List<GroupMember> groupMemberList = groupMemberBox.getAll();
         if(groupMemberList.size() != 0){
             for(GroupMember groupMember : groupMemberList){

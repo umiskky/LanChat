@@ -1,4 +1,4 @@
-package org.umiskky.service.pcap.packet.namednumber;
+package org.umiskky.service.pcaplib.packet.namednumber;
 
 import org.pcap4j.packet.namednumber.NamedNumber;
 

@@ -13,10 +13,10 @@ import org.pcap4j.packet.namednumber.EtherType;
 import org.pcap4j.packet.namednumber.TcpPort;
 import org.pcap4j.util.MacAddress;
 import org.pcap4j.util.NifSelector;
-import org.umiskky.service.pcap.packet.HelloPacket;
-import org.umiskky.service.pcap.packet.domain.AvatarId;
-import org.umiskky.service.pcap.packet.domain.Uuid;
-import org.umiskky.service.pcap.packet.namednumber.HelloPacketTypeCode;
+import org.umiskky.service.pcaplib.packet.HelloPacket;
+import org.umiskky.service.pcaplib.packet.domain.AvatarId;
+import org.umiskky.service.pcaplib.packet.domain.Uuid;
+import org.umiskky.service.pcaplib.packet.namednumber.HelloPacketTypeCode;
 
 import java.io.IOException;
 import java.net.Inet4Address;

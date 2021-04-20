@@ -24,7 +24,7 @@ public interface FriendDAO {
      * @author umiskky
      * @date 2021/4/19-19:35
      */
-    public static void resetStatus(){
+    static void resetStatus(){
         List<Friend> friendList = friendBox.getAll();
         if(friendList.size() != 0){
             for(Friend friend : friendList){

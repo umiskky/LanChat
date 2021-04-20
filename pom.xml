@@ -248,7 +248,7 @@
             <url>https://jcenter.bintray.com/</url>
         </repository>
     </repositories>
-    
+
     <pluginRepositories>
         <pluginRepository>
             <id>bintray-objectbox-objectbox</id>

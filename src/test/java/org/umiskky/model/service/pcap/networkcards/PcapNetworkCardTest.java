@@ -1,8 +1,8 @@
 package org.umiskky.model.service.pcap.networkcards;
 
 import org.junit.Test;
-import org.umiskky.service.pcap.networkcards.NetworkCard;
-import org.umiskky.service.pcap.networkcards.PcapNetworkCard;
+import org.umiskky.service.pcaplib.networkcards.NetworkCard;
+import org.umiskky.service.pcaplib.networkcards.PcapNetworkCard;
 
 import java.util.HashMap;
 

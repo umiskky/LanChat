@@ -1,4 +1,4 @@
-package org.umiskky.service.pcap.packet;
+package org.umiskky.service.pcaplib.packet;
 
 import lombok.Getter;
 import org.pcap4j.packet.AbstractPacket;
@@ -8,9 +8,9 @@ import org.pcap4j.packet.factory.PacketFactories;
 import org.pcap4j.packet.namednumber.NotApplicable;
 import org.pcap4j.packet.namednumber.TcpPort;
 import org.pcap4j.util.ByteArrays;
-import org.umiskky.service.pcap.packet.domain.AvatarId;
-import org.umiskky.service.pcap.packet.domain.Uuid;
-import org.umiskky.service.pcap.packet.namednumber.HelloPacketTypeCode;
+import org.umiskky.service.pcaplib.packet.domain.AvatarId;
+import org.umiskky.service.pcaplib.packet.domain.Uuid;
+import org.umiskky.service.pcaplib.packet.namednumber.HelloPacketTypeCode;
 
 import java.io.Serial;
 import java.net.Inet4Address;

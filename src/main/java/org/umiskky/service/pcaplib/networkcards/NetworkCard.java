@@ -1,4 +1,4 @@
-package org.umiskky.service.pcap.networkcards;
+package org.umiskky.service.pcaplib.networkcards;
 
 import org.pcap4j.core.PcapAddress;
 import org.pcap4j.core.PcapIpV4Address;

@@ -12,7 +12,7 @@ import io.objectbox.relation.ToMany;
  */
 @Entity
 public class Group {
-    public ToMany<GroupMember> groupMembers;
+
     @Id
     private long id;
     private String name;
@@ -20,6 +20,7 @@ public class Group {
     private byte[] key;
     @Index
     private String uuid;
+    public ToMany<GroupMember> groupMembers;
 
     public Group() {
     }
@@ -72,11 +73,4 @@ public class Group {
         this.key = key;
     }
 
-//    public ToMany<GroupMember> getGroupMembers() {
-//        return groupMembers;
-//    }
-//
-//    public void setGroupMembers(ToMany<GroupMember> groupMembers) {
-//        this.groupMembers = groupMembers;
-//    }
 }

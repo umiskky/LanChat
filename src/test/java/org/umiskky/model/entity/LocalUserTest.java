@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.umiskky.config.ConfigParse;
-import org.umiskky.service.pcap.packet.domain.SymmetricEncryptionKey;
+import org.umiskky.service.pcaplib.packet.domain.SymmetricEncryptionKey;
 
 import java.io.File;
 import java.io.IOException;
