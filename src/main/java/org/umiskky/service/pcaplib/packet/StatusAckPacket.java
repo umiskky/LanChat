@@ -1,6 +1,5 @@
 package org.umiskky.service.pcaplib.packet;
 
-import lombok.Getter;
 import org.pcap4j.packet.AbstractPacket;
 import org.pcap4j.packet.IllegalRawDataException;
 import org.pcap4j.packet.Packet;
@@ -128,11 +127,8 @@ public final class StatusAckPacket extends AbstractPacket {
 
         private static final int STATUS_ACK_HEADER_SIZE = GROUP_UUID_OFFSET + GROUP_UUID_SIZE;
 
-        @Getter
         private final StatusAckPacketAuthorityCode authorityCode;
-        @Getter
         private final Uuid srcUuid;
-        @Getter
         private final Uuid groupUuid;
 
         private StatusAckHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
@@ -183,6 +179,18 @@ public final class StatusAckPacket extends AbstractPacket {
         @Override
         public int length() {
             return STATUS_ACK_HEADER_SIZE;
+        }
+
+        public StatusAckPacketAuthorityCode getAuthorityCode() {
+            return this.authorityCode;
+        }
+
+        public Uuid getSrcUuid() {
+            return this.srcUuid;
+        }
+
+        public Uuid getGroupUuid() {
+            return this.groupUuid;
         }
     }
 }

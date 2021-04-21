@@ -1,10 +1,6 @@
 package org.umiskky.model.service.pcap.networkcards;
 
 import org.junit.Test;
-import org.umiskky.service.pcaplib.networkcards.NetworkCard;
-import org.umiskky.service.pcaplib.networkcards.PcapNetworkCard;
-
-import java.util.HashMap;
 
 /**
  * @author umiskky
@@ -14,7 +10,5 @@ import java.util.HashMap;
 public class PcapNetworkCardTest {
     @Test
     public void TestPcapNetworkCard(){
-        HashMap<String, NetworkCard> allDevs = PcapNetworkCard.getAllNetworkCards();
-        System.out.println(allDevs);
     }
 }

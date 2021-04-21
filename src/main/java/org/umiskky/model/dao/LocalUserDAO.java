@@ -24,8 +24,7 @@ public interface LocalUserDAO {
      */
     static LocalUser getLocalUser(){
         if(localUserBox.getAll().size() == 1){
-            LocalUser localUser = localUserBox.getAll().get(0);
-            return localUser;
+            return localUserBox.getAll().get(0);
         }
         return null;
     }

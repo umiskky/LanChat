@@ -7,6 +7,7 @@ import io.objectbox.BoxStore;
 import org.pcap4j.packet.namednumber.EtherType;
 import org.slf4j.Logger;
 import org.umiskky.config.ConfigParse;
+import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.model.dao.FriendDAO;
 import org.umiskky.model.dao.GroupMemberDAO;
 import org.umiskky.model.dao.LocalUserDAO;
@@ -28,9 +29,11 @@ public class InitTask {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(InitTask.class);
     public static BoxStore store;
-    public static HashMap<String, NetworkCard> networkCardHashMap;
-    public static String networkCard;
+    public static HashMap<String, NetworkCard> networkCardsMapByName;
+    public static HashMap<String, NetworkCard> networkCardsMapByLinkLayerAddr;
+    public static NetworkCard networkCardSelected;
     public static LocalUser localUser;
+
 
     /**
      * @description The method importConfig is used to construct a task to import config.
@@ -78,11 +81,9 @@ public class InitTask {
      * @date 2021/4/19-23:22
      */
     public static void cleanDatabase(){
-        store.runInTx(()->{
-            UserDAO.removeAll();
-            FriendDAO.resetStatus();
-            GroupMemberDAO.resetStatus();
-        });
+        UserDAO.removeAll();
+        FriendDAO.resetStatus();
+        GroupMemberDAO.resetStatus();
     }
 
     /**
@@ -93,7 +94,8 @@ public class InitTask {
      * @date 2021/4/19-23:25
      */
     public static void initNetworkCards(){
-        networkCardHashMap = PcapNetworkCard.getAllNetworkCards();
+        networkCardsMapByName = (HashMap<String, NetworkCard>) PcapNetworkCard.getAllNetworkCards().get("networkCardsMapByName");
+        networkCardsMapByLinkLayerAddr = (HashMap<String, NetworkCard>) PcapNetworkCard.getAllNetworkCards().get("networkCardsMapByLinkLayerAddr");
     }
 
     /**
@@ -118,5 +120,18 @@ public class InitTask {
 
         EtherType notifyEtherType = new EtherType((short) 0xAAA4, "NOTIFY");
         EtherType.register(notifyEtherType);
+    }
+
+    /**
+     * @description The method launchNetworkCardTasks is used to make network cards ready to work.
+     * @param
+     * @return void
+     * @author umiskky
+     * @date 2021/4/20-23:50
+     */
+    public static void launchNetworkCardTasks(){
+        for(NetworkCard networkCard : networkCardsMapByName.values()){
+            ServiceDispatcher.submitTask(new NetworkCardTask(networkCard));
+        }
     }
 }

@@ -2,11 +2,10 @@ package org.umiskky.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import org.umiskky.viewmodel.ChatViewModel;
-import org.umiskky.viewmodel.LoginViewModel;
 
 /**
  * @author umiskky

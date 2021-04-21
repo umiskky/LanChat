@@ -1,6 +1,5 @@
 package org.umiskky.service.pcaplib.packet;
 
-import lombok.Getter;
 import org.pcap4j.packet.AbstractPacket;
 import org.pcap4j.packet.IllegalRawDataException;
 import org.pcap4j.packet.Packet;
@@ -121,9 +120,7 @@ public final class NotifyPacket extends AbstractPacket{
 
         private static final int NOTIFY_HEADER_SIZE = TIMESTAMP_OFFSET + TIMESTAMP_SIZE;
 
-        @Getter
         private final Uuid uuid;
-        @Getter
         private final Timestamp timestamp;
 
         private NotifyHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
@@ -170,6 +167,14 @@ public final class NotifyPacket extends AbstractPacket{
         @Override
         public int length() {
             return NOTIFY_HEADER_SIZE;
+        }
+
+        public Uuid getUuid() {
+            return this.uuid;
+        }
+
+        public Timestamp getTimestamp() {
+            return this.timestamp;
         }
     }
 }

@@ -1,8 +1,6 @@
 package org.umiskky.service.task.socket;
 
 
-import lombok.Getter;
-import lombok.Setter;
 import org.umiskky.model.entity.Message;
 import org.umiskky.service.task.socket.utils.IOUtil;
 import org.umiskky.service.task.socket.utils.SocketUtil;
@@ -12,8 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-@Setter
-@Getter
 public class ClientThread  implements Runnable{
     private String ip;
     private int port;
@@ -43,5 +39,29 @@ public class ClientThread  implements Runnable{
             IOUtil.close(ois);
             SocketUtil.close(clientSocket);
         }
+    }
+
+    public String getIp() {
+        return this.ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public int getPort() {
+        return this.port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public Message getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
     }
 }

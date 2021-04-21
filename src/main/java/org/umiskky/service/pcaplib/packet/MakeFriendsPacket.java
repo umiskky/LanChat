@@ -1,6 +1,5 @@
 package org.umiskky.service.pcaplib.packet;
 
-import lombok.Getter;
 import org.pcap4j.packet.AbstractPacket;
 import org.pcap4j.packet.IllegalRawDataException;
 import org.pcap4j.packet.Packet;
@@ -120,9 +119,7 @@ public final class MakeFriendsPacket extends AbstractPacket{
 
         private static final int MAKE_FRIENDS_HEADER_SIZE = KEY_OFFSET + KEY_SIZE;
 
-        @Getter
         private final Uuid uuid;
-        @Getter
         private final SymmetricEncryptionKey key;
 
         private MakeFriendsHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
@@ -169,6 +166,14 @@ public final class MakeFriendsPacket extends AbstractPacket{
         @Override
         public int length() {
             return MAKE_FRIENDS_HEADER_SIZE;
+        }
+
+        public Uuid getUuid() {
+            return this.uuid;
+        }
+
+        public SymmetricEncryptionKey getKey() {
+            return this.key;
         }
     }
 

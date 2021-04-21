@@ -25,8 +25,9 @@ public interface PcapNetworkCard {
      * @author umiskky
      * @date 2021/4/19-23:14
      */
-    public static HashMap<String, NetworkCard> getAllNetworkCards(){
-        HashMap<String, NetworkCard> networkCards = new HashMap<>();
+    public static HashMap<String, Object> getAllNetworkCards(){
+        HashMap<String, NetworkCard> networkCardsMapByName = new HashMap<>();
+        HashMap<String, NetworkCard> networkCardsMapByLinkLayerAddr = new HashMap<>();
 
         List<PcapNetworkInterface> allDevices;
         try {
@@ -39,9 +40,13 @@ public interface PcapNetworkCard {
         for(PcapNetworkInterface pnif : allDevices){
             NetworkCard networkCard = new NetworkCard(pnif);
             if(networkCard.isValidNetworkCard()){
-                networkCards.put(networkCard.getName(), networkCard);
+                networkCardsMapByName.put(networkCard.getName(), networkCard);
+                networkCardsMapByLinkLayerAddr.put(networkCard.getLinkLayerAddr(), networkCard);
             }
         }
-        return networkCards;
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("networkCardsMapByName", networkCardsMapByName);
+        result.put("networkCardsMapByLinkLayerAddr", networkCardsMapByLinkLayerAddr);
+        return result;
     }
 }

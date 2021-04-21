@@ -7,15 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.umiskky.factories.ViewHandler;
 import org.umiskky.factories.ViewModelFactory;
 import org.umiskky.model.DataModel;
 import org.umiskky.view.ChatViewController;
 
 import java.io.IOException;
-import java.util.Objects;
-
-import static cn.hutool.core.util.URLUtil.url;
 
 /**
  * @author umiskky
