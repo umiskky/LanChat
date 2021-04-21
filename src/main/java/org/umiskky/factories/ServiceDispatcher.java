@@ -4,6 +4,9 @@ import org.slf4j.Logger;
 import org.umiskky.service.ExitService;
 import org.umiskky.service.InitService;
 import org.umiskky.service.task.NetworkCardTask;
+import org.umiskky.service.task.pcap.PacketParseDispatcher;
+import org.umiskky.service.task.pcap.ScheduledPacketTask;
+import org.umiskky.service.task.pcap.parsetask.*;
 import org.umiskky.service.task.pcap.sendtask.*;
 
 import java.io.IOException;
@@ -32,6 +35,7 @@ public class ServiceDispatcher{
     private static final ThreadPoolExecutor guiUpdateThreadPoolExec;
     private static final ThreadPoolExecutor databaseTaskThreadPoolExec;
 
+    private static final Properties properties;
     private static ViewModelFactory viewModelFactory;
 
     /*
@@ -42,7 +46,7 @@ public class ServiceDispatcher{
      * @date 2021/4/19-16:19
      */
     static {
-        Properties properties = new Properties();
+        properties = new Properties();
         try {
             properties.load(ServiceDispatcher.class.getResourceAsStream("../config/thread-pool.properties"));
             log.info("Load Thread Pool Config File.");
@@ -175,6 +179,36 @@ public class ServiceDispatcher{
 
     public static void submitTask(SendStatusAckPacketTask sendStatusAckPacketTask){
         pcapSenderThreadPoolExec.execute(sendStatusAckPacketTask);
+    }
+
+    public static void submitTask(ParseHelloPacketTask parseHelloPacketTask){
+        packetParserThreadPoolExec.execute(parseHelloPacketTask);
+    }
+    public static void submitTask(ParseInviteToGroupPacketTask parseInviteToGroupPacketTask){
+        packetParserThreadPoolExec.execute(parseInviteToGroupPacketTask);
+    }
+
+    public static void submitTask(ParseMakeFriendsPacketTask parseMakeFriendsPacketTask){
+        packetParserThreadPoolExec.execute(parseMakeFriendsPacketTask);
+    }
+
+    public static void submitTask(ParseNotifyPacketTask parseNotifyPacketTask){
+        packetParserThreadPoolExec.execute(parseNotifyPacketTask);
+    }
+
+    public static void submitTask(ParseStatusAckPacketTask parseStatusAckPacketTask){
+        packetParserThreadPoolExec.execute(parseStatusAckPacketTask);
+    }
+
+    public static void submitTask(PacketParseDispatcher packetParseDispatcher){
+        packetDispatcherThreadPoolExec.execute(packetParseDispatcher);
+    }
+
+    public static void submitTask(ScheduledPacketTask scheduledPacketTask){
+        pcapScheduledThreadPoolExec.scheduleAtFixedRate(scheduledPacketTask,
+                Long.parseLong(properties.getProperty("PCAP_SCHEDULED.THREAD.INITIAL_DELAY")),
+                Long.parseLong(properties.getProperty("PCAP_SCHEDULED.THREAD.DELAY")),
+                TimeUnit.SECONDS);
     }
 
     public static void submitTask(NetworkCardTask networkCardTask){
