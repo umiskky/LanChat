@@ -19,7 +19,7 @@ import java.awt.event.MouseEvent;
  */
 public class ChatViewController {
     private ChatViewModel chatViewModel;
-    private Friend[] FList;
+    //private Friend[] FList;
     private Parent root;
 
     @FXML
@@ -72,9 +72,9 @@ public class ChatViewController {
     }
 
     public void friendListInit(){
-        for(int i = 0;i < FList.length;i ++){
-            friendList.getItems().add(new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus()));
-        }
+        //for(int i = 0;i < FList.length;i ++){
+        //    friendList.getItems().add(new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus()));
+        //}
     }
 
     public Object $(String id) {

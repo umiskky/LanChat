@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.umiskky.factories.ViewModelFactory;
 import org.umiskky.model.DataModel;
+import org.umiskky.model.dao.LocalUserDAO;
 import org.umiskky.service.task.InitTask;
 import org.umiskky.view.ChatViewController;
 import org.umiskky.view.LoginViewController;
@@ -77,6 +78,7 @@ public class LoginViewModel {
         try {
             InitTask.localUser.setNickname(account.get());
             InitTask.localUser.setAvatarId(Integer.parseInt(LoginViewController.headid));
+            LocalUserDAO.putLocalUser(InitTask.localUser);
 
 
             FXMLLoader loader = new FXMLLoader();
