@@ -50,7 +50,7 @@ public class LoginViewController {
      * @apiNote this method is used to init the bindings of the properties
      */
     public void bindInit(){
-        loginViewModel.getAccount().bind(account.textProperty());
+        LoginViewModel.account.bind(account.textProperty());
     }
 
     /**
@@ -80,6 +80,9 @@ public class LoginViewController {
      */
     public String choose(){
         headid = Integer.toString((Integer.parseInt(headid) + 1) % 10);
+        if(headid.equals("9")){
+            headid = "0";
+        }
         return headid;
     }
 

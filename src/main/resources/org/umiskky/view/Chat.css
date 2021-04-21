@@ -40,6 +40,7 @@
     -fx-cursor: hand;
 }
 
+/*---------------------------------------------------------------------*/
 /*中间部分*/
 /*搜索框*/
 #search
@@ -57,6 +58,41 @@
     -fx-background-color: transparent;
 }
 
+.outline
+{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-border-style: none;
+    -fx-background-image: url("org/umiskky/view/Image/icon/outline.png");
+    -fx-background-size: 15px 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.online
+{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-border-style: none;
+    -fx-background-image: url("org/umiskky/view/Image/icon/online.png");
+    -fx-background-size: 15px 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.ListItem
+{
+    -fx-background-color:transparent;
+    -fx-text-fill:black;
+}
+
+.chosen,.chosen:hover,.chosen:pressed
+{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+/*------------------------------------------------------------------*/
 /*右部分*/
 /*退出*/
 #quit
@@ -93,4 +129,65 @@
     -fx-cursor: hand;
 }
 
+/*聊天框内的头像*/
+.head{
 
+    -fx-background-radius: 1px;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20px 20px;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-background-image: url("org/umiskky/view/Image/head/0.jpg");
+    -fx-cursor: hand;
+    -fx-border-width: 1px;
+    -fx-border-radius: 1px;
+    -fx-border-color:transparent;
+}
+
+/*聊天框内最外层pane*/
+.pane{
+    -fx-background-radius: 0px;
+    -fx-background-color:rgba(255,255,255,0);
+}
+
+/*聊天框内对象的聊天气泡*/
+.lefttext{
+    -fx-control-inner-background:#feffd3;
+    -fx-control-inner-radius:5px;
+    -fx-background-color: #feffd3;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #feffd3;
+    -fx-font-size: 15px;
+    -fx-font-family: "Forte";
+    -fx-font-style: italic;
+    -fx-text-fill:black;
+}
+
+.leftarrow{
+    -fx-background-image: url("org/umiskky/view/Image/icon/left.png");
+    -fx-background-size: 5px 5px;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
+
+/*聊天框内自己的气泡*/
+.righttext{
+    -fx-control-inner-background:#7dc5eb;
+    -fx-control-inner-radius:5px;
+    -fx-background-color: #7dc5eb;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #7dc5eb;
+    -fx-font-size: 15px;
+    -fx-font-family: "Forte";
+    -fx-font-style: italic;
+    -fx-text-fill:black;
+}
+
+.rightarrow{
+    -fx-background-image: url("org/umiskky/view/Image/icon/right.png");
+    -fx-background-size: 5px 5px;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
