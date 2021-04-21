@@ -1,7 +1,5 @@
 package org.umiskky.service.task.socket.utils;
 
-import lombok.Getter;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -10,7 +8,6 @@ import java.util.Random;
 /**
  * @apiNote 获取系统空闲端口号
  */
-@Getter
 public class SystemFreePort {
     private static Random random = new Random();
     private Socket socket;
@@ -68,5 +65,9 @@ public class SystemFreePort {
     public static int getRandomNumber(){
         int res = random.nextInt(Math.abs(END - START)) + START;
         return  res;
+    }
+
+    public Socket getSocket() {
+        return this.socket;
     }
 }

@@ -3,6 +3,7 @@ package org.umiskky.model.entity;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.annotation.Index;
+import io.objectbox.annotation.Unique;
 
 /**
  * @author umiskky
@@ -14,6 +15,7 @@ public class User {
     @Id
     private long id;
     @Index
+    @Unique
     private String uuid;
     private String nickname;
     private String ipAddress;

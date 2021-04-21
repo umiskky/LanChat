@@ -1,4 +1,4 @@
-package org.umiskky.service.task.pcap;
+package org.umiskky.service.task.pcap.sendtask;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -24,6 +24,7 @@ import org.umiskky.service.task.InitTask;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author umiskky
@@ -61,13 +62,13 @@ public class SendHelloPacketTask implements Runnable {
 
         HelloPacket.Builder helloBuilder = new HelloPacket.Builder();
         try {
-            helloBuilder
-                    .avatarId(AvatarId.getInstance(localUser.getAvatarId()))
-                    .serverAddress((Inet4Address) InetAddress.getByName(localUser.getIpAddress()))
-                    .serverPort(TcpPort.getInstance((short)localUser.getServerPort()))
-                    .uuid(Uuid.getInstance(localUser.getUuid()))
-                    .typeCode(helloPacketTypeCode)
-                    .payloadBuilder(new UnknownPacket.Builder().rawData(payload.getBytes()));
+                helloBuilder
+                        .avatarId(AvatarId.getInstance(localUser.getAvatarId()))
+                        .serverAddress((Inet4Address) InetAddress.getByName(localUser.getIpAddress().replace("/","")))
+                        .serverPort(TcpPort.getInstance((short)localUser.getServerPort()))
+                        .uuid(Uuid.getInstance(localUser.getUuid()))
+                        .typeCode(helloPacketTypeCode)
+                        .payloadBuilder(new UnknownPacket.Builder().rawData(payload.getBytes(StandardCharsets.UTF_8)));
         } catch (UnknownHostException e) {
             log.error(e.getMessage());
         }

@@ -1,4 +1,4 @@
-package org.umiskky.service.task.pcap;
+package org.umiskky.service.task.pcap.sendtask;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;

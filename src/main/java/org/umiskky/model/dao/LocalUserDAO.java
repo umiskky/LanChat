@@ -1,9 +1,11 @@
 package org.umiskky.model.dao;
 
 import io.objectbox.Box;
+import io.objectbox.exception.UniqueViolationException;
 import org.slf4j.Logger;
 import org.umiskky.model.DataModelManager;
 import org.umiskky.model.entity.LocalUser;
+import org.umiskky.model.entity.LocalUser_;
 import org.umiskky.service.task.InitTask;
 
 /**
@@ -24,10 +26,13 @@ public interface LocalUserDAO {
      */
     static LocalUser getLocalUser(){
         if(localUserBox.getAll().size() == 1){
-            LocalUser localUser = localUserBox.getAll().get(0);
-            return localUser;
+            return localUserBox.getAll().get(0);
         }
         return null;
+    }
+
+    static LocalUser getLocalUserById(String uuid){
+        return localUserBox.query().equal(LocalUser_.uuid, uuid).build().findUnique();
     }
 
     /**
@@ -38,7 +43,15 @@ public interface LocalUserDAO {
      * @date 2021/4/19-23:44
      */
     static void putLocalUser(LocalUser localUser){
-        localUserBox.put(localUser);
+        InitTask.store.runInTx(()->{
+            try {
+                localUserBox.put(localUser);
+            } catch (UniqueViolationException e){
+                log.debug(e.getMessage());
+                localUserBox.remove(LocalUserDAO.getLocalUserById(localUser.getUuid()));
+                localUserBox.put(localUser);
+            }
+        });
     }
 
 }

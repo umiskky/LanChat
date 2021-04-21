@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.Getter;
 import org.umiskky.view.ChatViewController;
 import org.umiskky.view.LoginViewController;
 
@@ -15,7 +14,6 @@ import java.io.IOException;
  * @version 0.0.1
  * @date 2021/04/13
  */
-@Getter
 public class ViewHandler {
 
     private Stage stage;
@@ -55,5 +53,13 @@ public class ViewHandler {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public Stage getStage() {
+        return this.stage;
+    }
+
+    public ViewModelFactory getViewModelFactory() {
+        return this.viewModelFactory;
     }
 }

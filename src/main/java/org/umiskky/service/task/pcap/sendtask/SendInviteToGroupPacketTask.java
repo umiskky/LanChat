@@ -1,4 +1,4 @@
-package org.umiskky.service.task.pcap;
+package org.umiskky.service.task.pcap.sendtask;
 
 import com.alibaba.fastjson.JSON;
 import org.pcap4j.core.NotOpenException;
@@ -32,9 +32,9 @@ public class SendInviteToGroupPacketTask implements Runnable {
     private final MacAddress dstMacAddress;
     private final Uuid groupUuid;
     private final SymmetricEncryptionKey key;
-    private final ArrayList<Uuid> groupMembers;
+    private final ArrayList<String> groupMembers;
 
-    public SendInviteToGroupPacketTask(NetworkCard networkCard, MacAddress dstMacAddress, Uuid groupUuid, SymmetricEncryptionKey key, ArrayList<Uuid> groupMembers) {
+    public SendInviteToGroupPacketTask(NetworkCard networkCard, MacAddress dstMacAddress, Uuid groupUuid, SymmetricEncryptionKey key, ArrayList<String> groupMembers) {
         this.networkCard = networkCard;
         this.dstMacAddress = dstMacAddress;
         this.groupUuid = groupUuid;
@@ -47,9 +47,6 @@ public class SendInviteToGroupPacketTask implements Runnable {
         PcapHandle handle = new SendNifBuilder(networkCard.getName()).build();
         LocalUser localUser = InitTask.localUser;
 
-//        Map<String, Object> groupMembersMap = new HashMap<>();
-//        groupMembersMap.put("groupMembersNum", groupMembers == null ? 0 : groupMembers.size());
-//        groupMembersMap.put("groupMembers", groupMembers == null ? new ArrayList<Uuid>() : groupMembers);
         String payload = JSON.toJSONString(groupMembers);
 
         InviteToGroupPacket.Builder inviteToGroupPacketBuilder = new InviteToGroupPacket.Builder();

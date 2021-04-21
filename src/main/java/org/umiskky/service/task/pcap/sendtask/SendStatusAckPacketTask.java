@@ -1,4 +1,4 @@
-package org.umiskky.service.task.pcap;
+package org.umiskky.service.task.pcap.sendtask;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
@@ -39,6 +39,21 @@ public class SendStatusAckPacketTask implements Runnable{
         this.networkCard = networkCard;
         this.authorityCode = authorityCode;
         this.dstMacAddress = dstMacAddress;
+        this.groupUuid = groupUuid;
+    }
+
+    /**
+     * @description The method SendStatusAckPacketTask is used to construct a group success packet.
+     * @param networkCard
+     * @param groupUuid
+     * @return
+     * @author umiskky
+     * @date 2021/4/21-20:38
+     */
+    public SendStatusAckPacketTask(NetworkCard networkCard, Uuid groupUuid) {
+        this.networkCard = networkCard;
+        this.authorityCode = StatusAckPacketAuthorityCode.GROUP_SUCCESS;
+        this.dstMacAddress = MacAddress.ETHER_BROADCAST_ADDRESS;
         this.groupUuid = groupUuid;
     }
 

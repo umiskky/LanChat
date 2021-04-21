@@ -1,6 +1,5 @@
 package org.umiskky.service.pcaplib.packet;
 
-import lombok.Getter;
 import org.pcap4j.packet.AbstractPacket;
 import org.pcap4j.packet.IllegalRawDataException;
 import org.pcap4j.packet.Packet;
@@ -129,11 +128,8 @@ public final class InviteToGroupPacket extends AbstractPacket{
 
         private static final int INVITE_TO_GROUP_HEADER_SIZE = KEY_OFFSET + KEY_SIZE;
 
-        @Getter
         private final Uuid srcUuid;
-        @Getter
         private final Uuid groupUuid;
-        @Getter
         private final SymmetricEncryptionKey key;
 
         private InviteToGroupHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
@@ -184,6 +180,18 @@ public final class InviteToGroupPacket extends AbstractPacket{
         @Override
         public int length() {
             return INVITE_TO_GROUP_HEADER_SIZE;
+        }
+
+        public Uuid getSrcUuid() {
+            return this.srcUuid;
+        }
+
+        public Uuid getGroupUuid() {
+            return this.groupUuid;
+        }
+
+        public SymmetricEncryptionKey getKey() {
+            return this.key;
         }
     }
 }

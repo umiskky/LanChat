@@ -1,6 +1,5 @@
 package org.umiskky.service.pcaplib.packet;
 
-import lombok.Getter;
 import org.pcap4j.packet.AbstractPacket;
 import org.pcap4j.packet.IllegalRawDataException;
 import org.pcap4j.packet.Packet;
@@ -152,15 +151,10 @@ public final class HelloPacket extends AbstractPacket {
 
         private static final int HELLO_HEADER_SIZE = AVATAR_ID_OFFSET + AVATAR_ID_SIZE;
 
-        @Getter
         private final HelloPacketTypeCode typeCode;
-        @Getter
         private final Uuid uuid;
-        @Getter
         private final Inet4Address serverAddress;
-        @Getter
         private final TcpPort serverPort;
-        @Getter
         private final AvatarId avatarId;
 
         private HelloHeader(byte[] rawData, int offset, int length) throws IllegalRawDataException {
@@ -220,6 +214,26 @@ public final class HelloPacket extends AbstractPacket {
         @Override
         public int length() {
             return HELLO_HEADER_SIZE;
+        }
+
+        public HelloPacketTypeCode getTypeCode() {
+            return this.typeCode;
+        }
+
+        public Uuid getUuid() {
+            return this.uuid;
+        }
+
+        public Inet4Address getServerAddress() {
+            return this.serverAddress;
+        }
+
+        public TcpPort getServerPort() {
+            return this.serverPort;
+        }
+
+        public AvatarId getAvatarId() {
+            return this.avatarId;
         }
     }
 }

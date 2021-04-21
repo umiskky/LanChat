@@ -7,6 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
+import org.umiskky.model.dao.UserDAO;
+import org.umiskky.service.InitService;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,35 +51,47 @@ public class UserTest {
         Box<User> userBox1 = store.boxFor(User.class);
         Box<User> userBox2 = store.boxFor(User.class);
 
-        Thread thread1 = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    for(int i=0; i<10000; i++){
-                        User user = new User();
-                        user.setUuid(Integer.toString(i));
-                        userBox1.put(user);
-                        System.out.println(("Insert " + (i) + "User"));
-                    }
-                }
-            }
-        );
+//        Thread thread1 = new Thread(
+//            new Runnable() {
+//                @Override
+//                public void run() {
+//                    for(int i=0; i<10000; i++){
+//                        User user = new User();
+//                        user.setUuid(Integer.toString(i));
+//                        userBox1.put(user);
+//                        System.out.println(("Insert " + (i) + "User"));
+//                    }
+//                }
+//            }
+//        );
+//
+//        Thread thread2 = new Thread(
+//            new Runnable() {
+//                @Override
+//                public void run() {
+//                    for(int i=0; i<10000; i++){
+//                        User user = new User();
+//                        user.setUuid(Integer.toString(i+20000));
+//                        userBox1.put(user);
+//                        System.out.println(("Insert " + (i + 20000) + "User"));
+//                    }
+//                }
+//            }
+//        );
+//
+//        store.runInTx(thread1);
+//        store.runInTx(thread2);
+        User user = new User();
+        user.setUuid(Integer.toString(1000));
+        User user2 = new User();
+        user2.setUuid(Integer.toString(1001));
+        userBox1.put(user);
+        userBox1.put(user2);
+        userBox2.getAll();
 
-        Thread thread2 = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    for(int i=0; i<10000; i++){
-                        User user = new User();
-                        user.setUuid(Integer.toString(i+20000));
-                        userBox1.put(user);
-                        System.out.println(("Insert " + (i + 20000) + "User"));
-                    }
-                }
-            }
-        );
-
-        store.runInTx(thread1);
-        store.runInTx(thread2);
+        InitService initService  = new InitService();
+        initService.initService();
+        User user000 = UserDAO.getUserById("8888888");
+        System.out.println(user000.getLastUpdated());
     }
 }

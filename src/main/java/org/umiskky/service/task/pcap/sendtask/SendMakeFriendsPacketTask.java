@@ -1,4 +1,4 @@
-package org.umiskky.service.task.pcap;
+package org.umiskky.service.task.pcap.sendtask;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
@@ -25,10 +25,18 @@ public class SendMakeFriendsPacketTask implements Runnable{
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(SendMakeFriendsPacketTask.class);
     private final NetworkCard networkCard;
     private final MacAddress dstMacAddress;
+    private final byte[] key;
 
     public SendMakeFriendsPacketTask(NetworkCard networkCard, MacAddress dstMacAddress) {
         this.networkCard = networkCard;
         this.dstMacAddress = dstMacAddress;
+        this.key = InitTask.localUser.getKey();
+    }
+
+    public SendMakeFriendsPacketTask(NetworkCard networkCard, MacAddress dstMacAddress, byte[] key) {
+        this.networkCard = networkCard;
+        this.dstMacAddress = dstMacAddress;
+        this.key = key;
     }
 
     @Override
@@ -39,7 +47,7 @@ public class SendMakeFriendsPacketTask implements Runnable{
         MakeFriendsPacket.Builder makeFriendsBuilder = new MakeFriendsPacket.Builder();
         makeFriendsBuilder
                 .uuid(Uuid.getInstance(localUser.getUuid()))
-                .key(SymmetricEncryptionKey.getInstance(localUser.getKey()));
+                .key(SymmetricEncryptionKey.getInstance(key));
 
         EthernetPacket.Builder etherBuilder = new EthernetPacket.Builder();
         etherBuilder
