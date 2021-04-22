@@ -217,19 +217,21 @@ public class ServiceDispatcher{
     }
 
     public static void submitTask(PcapCaptureTask pcapCaptureTask){
-        try {
-            Properties pcapHandleProperties = new Properties();
+        pcapCaptureThreadPoolExec.execute(()->{
             try {
-                pcapHandleProperties.load(ServiceDispatcher.class.getResourceAsStream("../config/pcap-handle.properties"));
-            } catch (IOException e) {
-                e.printStackTrace();
+                Properties pcapHandleProperties = new Properties();
+                try {
+                    pcapHandleProperties.load(ServiceDispatcher.class.getResourceAsStream("../config/pcap-handle.properties"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                pcapCaptureTask.getHandle().loop(Integer.parseInt(pcapHandleProperties.getProperty("DEFAULT.PCAP_CAPTURE_HANDLE.COUNT")),
+                        pcapCaptureTask.getListener(),
+                        packetDispatcherThreadPoolExec);
+            } catch (PcapNativeException | InterruptedException | NotOpenException e) {
+                log.error(e.getMessage());
             }
-            pcapCaptureTask.getHandle().loop(Integer.parseInt(pcapHandleProperties.getProperty("DEFAULT.PCAP_CAPTURE_HANDLE.COUNT")),
-                    pcapCaptureTask.getListener(),
-                    pcapCaptureThreadPoolExec);
-        } catch (PcapNativeException | InterruptedException | NotOpenException e) {
-            log.error(e.getMessage());
-        }
+        });
     }
 
     public static void submitTask(NetworkCardTask networkCardTask){

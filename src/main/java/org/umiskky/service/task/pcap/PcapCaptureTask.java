@@ -34,7 +34,7 @@ public class PcapCaptureTask{
     }
 
     private void initialize() {
-        this.filter = "((ether proto 0xAAA0 or ether proto 0xAAA2) and (ether dst "
+        this.filter = "(((ether proto 0xAAA0 or ether proto 0xAAA2) and (ether dst "
                 + Pcaps.toBpfString(MacAddress.getByName(networkCard.getLinkLayerAddr()))
                 + " or ether dst "
                 + Pcaps.toBpfString(MacAddress.ETHER_BROADCAST_ADDRESS)
@@ -42,7 +42,9 @@ public class PcapCaptureTask{
                 + Pcaps.toBpfString(MacAddress.getByName(networkCard.getLinkLayerAddr()))
                 + ")) or ((ether proto 0xAAA4) and (ether dst "
                 + Pcaps.toBpfString(MacAddress.ETHER_BROADCAST_ADDRESS)
-                + "))";
+                + "))) and not (ether src "
+                + Pcaps.toBpfString(MacAddress.getByName(networkCard.getLinkLayerAddr()))
+                + ")";
         log.info("Filter: " + filter);
 
         this.handle = new CaptureNifBuilder(networkCard.getName()).build(filter);
