@@ -9,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.umiskky.factories.ViewModelFactory;
 import org.umiskky.model.DataModel;
+import org.umiskky.model.dao.LocalUserDAO;
+import org.umiskky.service.task.InitTask;
 import org.umiskky.view.ChatViewController;
+import org.umiskky.view.LoginViewController;
 
 import java.io.IOException;
 
@@ -21,7 +24,7 @@ import java.io.IOException;
 public class LoginViewModel {
     private static ViewModelFactory viewModelFactory1;
     private DataModel dataModel;
-    private StringProperty account;
+    public static StringProperty account;
     private Button headPortrait;
 
     /**
@@ -73,6 +76,11 @@ public class LoginViewModel {
      */
     public static void login(Button login){
         try {
+            InitTask.localUser.setNickname(account.get());
+            InitTask.localUser.setAvatarId(Integer.parseInt(LoginViewController.headid));
+            LocalUserDAO.putLocalUser(InitTask.localUser);
+
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(LoginViewModel.class.getResource("/org/umiskky/view/" + "ChatView.fxml"));
             Parent root = loader.load();
@@ -94,9 +102,9 @@ public class LoginViewModel {
         return this.dataModel;
     }
 
-    public StringProperty getAccount() {
-        return this.account;
-    }
+    //public StringProperty getAccount() {
+    //    return this.account;
+    //}
 
     public Button getHeadPortrait() {
         return this.headPortrait;

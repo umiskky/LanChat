@@ -82,9 +82,10 @@
                         </VBox>
                      </children></HBox>
                    <VBox alignment="TOP_CENTER" prefHeight="525.0" prefWidth="220.0">
-                       <ListView fx:id="friendList" id="friendList" prefHeight="525.0" prefWidth="220.0">
+<!--                       <ListView fx:id="friendList" id="friendList" prefHeight="525.0" prefWidth="220.0">-->
 
-                       </ListView>
+<!--                       </ListView>-->
+
                    </VBox>
                </children>
             </VBox>
@@ -105,7 +106,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="575.0">
                            <children>
-                               <Label prefHeight="29.0" prefWidth="175.0" >
+                               <Label id="F_account" prefHeight="29.0" prefWidth="175.0" >
                                    <font>
                                        <Font name="YouYuan" size="25.0" />
                                    </font>
@@ -149,11 +150,11 @@
                      </children></HBox>
                   <HBox prefHeight="100.0" prefWidth="620.0">
                      <children>
-                        <TextArea prefHeight="100.0" prefWidth="620.0" />
+                        <TextArea fx:id="chattext" id="chattext" prefHeight="100.0" prefWidth="620.0" />
                      </children></HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="620.0">
                      <children>
-                        <Button id="submit" mnemonicParsing="false" prefHeight="25.0" text="Submit">
+                        <Button fx:id="submit" id="submit" mnemonicParsing="false" prefHeight="25.0" text="Submit">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
