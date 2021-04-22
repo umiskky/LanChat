@@ -19,6 +19,7 @@ public class InitService implements Runnable{
         InitTask.initNetworkCards();
         InitTask.initEthernetTypeCode();
         InitTask.launchNetworkCardTasks();
+        InitTask.launchSocketServerTask();
     }
 
     @Override

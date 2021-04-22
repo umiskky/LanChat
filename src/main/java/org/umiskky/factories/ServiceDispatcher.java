@@ -5,12 +5,14 @@ import org.pcap4j.core.PcapNativeException;
 import org.slf4j.Logger;
 import org.umiskky.service.ExitService;
 import org.umiskky.service.InitService;
+import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.NetworkCardTask;
 import org.umiskky.service.task.pcap.PacketParseDispatcher;
 import org.umiskky.service.task.pcap.PcapCaptureTask;
 import org.umiskky.service.task.pcap.ScheduledPacketTask;
 import org.umiskky.service.task.pcap.parsetask.*;
 import org.umiskky.service.task.pcap.sendtask.*;
+import org.umiskky.service.task.socket.ServerThread;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -232,5 +234,11 @@ public class ServiceDispatcher{
 
     public static void submitTask(NetworkCardTask networkCardTask){
         networkThreadPoolExec.execute(networkCardTask);
+    }
+
+    public static void submitTask(ServerThread serverThread){
+        serverThread.setPort(InitTask.localUser.getServerPort());
+        serverThread.setThreadPoolExecutor(socketParserThreadPoolExec);
+        socketServerThreadPoolExec.execute(serverThread);
     }
 }

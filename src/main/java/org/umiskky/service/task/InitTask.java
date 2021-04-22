@@ -16,8 +16,11 @@ import org.umiskky.model.entity.LocalUser;
 import org.umiskky.model.entity.MyObjectBox;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
 import org.umiskky.service.pcaplib.networkcards.PcapNetworkCard;
+import org.umiskky.service.task.socket.ServerThread;
+import org.umiskky.service.task.socket.utils.SystemFreePort;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -66,7 +69,11 @@ public class InitTask {
                 LocalUserDAO.putLocalUser(tmpLocalUser);
             }
             localUser = LocalUserDAO.getLocalUser();
-            localUser.setServerPort(0);
+            try {
+                localUser.setServerPort(new SystemFreePort().getAndReleasePort());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             localUser.setIpAddress("");
             LocalUserDAO.putLocalUser(localUser);
         });
@@ -133,5 +140,17 @@ public class InitTask {
         for(NetworkCard networkCard : networkCardsMapByName.values()){
             ServiceDispatcher.submitTask(new NetworkCardTask(networkCard));
         }
+    }
+
+    /**
+     * @description The method launchSocketServerTask is used to init socket server.
+     * @param
+     * @return void
+     * @author umiskky
+     * @date 2021/4/22-13:49
+     */
+    public static void launchSocketServerTask(){
+        ServerThread serverThread = new ServerThread();
+        ServiceDispatcher.submitTask(serverThread);
     }
 }
