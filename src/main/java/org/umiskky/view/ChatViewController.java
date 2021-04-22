@@ -19,7 +19,7 @@ import java.awt.event.MouseEvent;
  */
 public class ChatViewController {
     private ChatViewModel chatViewModel;
-    //private Friend[] FList;
+    private static Friend[] FList;
     private Parent root;
 
     @FXML
@@ -46,6 +46,8 @@ public class ChatViewController {
     public void init(ChatViewModel chatViewModel) {
         this.chatViewModel = chatViewModel;
         headPortraitChat.setStyle(String.format("-fx-background-image: url('org/umiskky/view/Image/head/%s.jpg')", LoginViewController.headid));
+        chattext.setDisable(true);
+        submit.setDisable(true);
         addListener();
         bindInit();
         friendListInit();
@@ -63,18 +65,20 @@ public class ChatViewController {
         quit.setTooltip(new Tooltip("退出"));
         quit.setOnAction((e) -> chatViewModel.quit());
 
-        chatSelect.setOnMouseClicked((e) -> chatViewModel.switchSC());
+        chatSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectFriend(this.friendList));
 
-        friendSelect.setOnMouseClicked((e) -> chatViewModel.switchSF());
+        friendSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectUser(this.friendList));
 
         submit.setOnMouseClicked((e) -> chatViewModel.submit(this.chatList));
 
     }
 
     public void friendListInit(){
-        //for(int i = 0;i < FList.length;i ++){
-        //    friendList.getItems().add(new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus()));
-        //}
+        for(int i = 0;i < FList.length;i ++){
+            FriendListItem newFriend = new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus(),FList[i].getUuid());
+            newFriend.setActionForSendMsg(this,FList[i].getUuid());
+            friendList.getItems().add(newFriend);
+        }
     }
 
     public Object $(String id) {
