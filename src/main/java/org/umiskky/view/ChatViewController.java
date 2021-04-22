@@ -7,10 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import org.umiskky.model.entity.Friend;
 import org.umiskky.viewmodel.ChatViewModel;
-
-import java.awt.event.MouseEvent;
 
 /**
  * @author umiskky
@@ -19,7 +16,7 @@ import java.awt.event.MouseEvent;
  */
 public class ChatViewController {
     private ChatViewModel chatViewModel;
-    private static Friend[] FList;
+    //private static Friend[] FList;
     private Parent root;
 
     @FXML
@@ -74,11 +71,11 @@ public class ChatViewController {
     }
 
     public void friendListInit(){
-        for(int i = 0;i < FList.length;i ++){
-            FriendListItem newFriend = new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus(),FList[i].getUuid());
-            newFriend.setActionForSendMsg(this,FList[i].getUuid());
-            friendList.getItems().add(newFriend);
-        }
+        //for(int i = 0;i < FList.length;i ++){
+        //    FriendListItem newFriend = new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus(),FList[i].getUuid());
+        //    newFriend.setActionForSendMsg(this,FList[i].getUuid());
+        //    friendList.getItems().add(newFriend);
+        //}
     }
 
     public Object $(String id) {

@@ -7,10 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.factories.ViewModelFactory;
 import org.umiskky.model.DataModel;
 import org.umiskky.model.dao.LocalUserDAO;
 import org.umiskky.service.task.InitTask;
+import org.umiskky.service.task.pcap.sendtask.SendHelloPacketTask;
 import org.umiskky.view.ChatViewController;
 import org.umiskky.view.LoginViewController;
 
@@ -22,6 +25,7 @@ import java.io.IOException;
  * @date 2021/04/13
  */
 public class LoginViewModel {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(LoginViewModel.class);
     private static ViewModelFactory viewModelFactory1;
     private DataModel dataModel;
     public static StringProperty account;

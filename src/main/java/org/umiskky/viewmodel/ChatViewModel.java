@@ -50,13 +50,28 @@ public class ChatViewModel {
             }else if(instatus.equals("false")){
                 status = false;
             }
-
-            friendList.getItems().add(new FriendListItem(inhead,account,status,uuid));
+            FriendListItem newFriend = new FriendListItem(inhead,account,status,uuid);
+            //newFriend.setActionForSendMsg();
+            friendList.getItems().add(newFriend);
         }
     }
 
     public void switchSelectUser(ListView friendList){
         friendList.getItems().clear();
+        for(Map.Entry<String,Vector<String>> entry : userMap.entrySet()){
+            String inhead = entry.getValue().get(0);
+            String account = entry.getValue().get(1);
+            String instatus = entry.getValue().get(2);
+            String uuid = entry.getValue().get(3);
+            Boolean status = false;
+
+            if(instatus.equals("true")){
+                status = true;
+            }
+
+            friendList.getItems().add(new UserListItem(inhead,account,status,uuid));
+
+        }
     }
 
     public void submit(ListView chatList){
