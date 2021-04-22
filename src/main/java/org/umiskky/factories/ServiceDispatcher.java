@@ -1,10 +1,13 @@
 package org.umiskky.factories;
 
+import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PcapNativeException;
 import org.slf4j.Logger;
 import org.umiskky.service.ExitService;
 import org.umiskky.service.InitService;
 import org.umiskky.service.task.NetworkCardTask;
 import org.umiskky.service.task.pcap.PacketParseDispatcher;
+import org.umiskky.service.task.pcap.PcapCaptureTask;
 import org.umiskky.service.task.pcap.ScheduledPacketTask;
 import org.umiskky.service.task.pcap.parsetask.*;
 import org.umiskky.service.task.pcap.sendtask.*;
@@ -154,7 +157,7 @@ public class ServiceDispatcher{
     }
 
     public static void submitTask(InitService initService){
-        initService.initService();
+        serviceThreadPoolExec.execute(initService);
     }
 
     public static void submitTask(ExitService exitService){
@@ -209,6 +212,22 @@ public class ServiceDispatcher{
                 Long.parseLong(properties.getProperty("PCAP_SCHEDULED.THREAD.INITIAL_DELAY")),
                 Long.parseLong(properties.getProperty("PCAP_SCHEDULED.THREAD.DELAY")),
                 TimeUnit.SECONDS);
+    }
+
+    public static void submitTask(PcapCaptureTask pcapCaptureTask){
+        try {
+            Properties pcapHandleProperties = new Properties();
+            try {
+                pcapHandleProperties.load(ServiceDispatcher.class.getResourceAsStream("../config/pcap-handle.properties"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            pcapCaptureTask.getHandle().loop(Integer.parseInt(pcapHandleProperties.getProperty("DEFAULT.PCAP_CAPTURE_HANDLE.COUNT")),
+                    pcapCaptureTask.getListener(),
+                    pcapCaptureThreadPoolExec);
+        } catch (PcapNativeException | InterruptedException | NotOpenException e) {
+            log.error(e.getMessage());
+        }
     }
 
     public static void submitTask(NetworkCardTask networkCardTask){

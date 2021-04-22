@@ -2,6 +2,8 @@ package org.umiskky.service.task;
 
 import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
+import org.umiskky.service.task.pcap.PcapCaptureTask;
+import org.umiskky.service.task.pcap.ScheduledPacketTask;
 import org.umiskky.service.task.pcap.sendtask.SendHelloPacketTask;
 
 /**
@@ -19,6 +21,10 @@ public class NetworkCardTask implements Runnable{
 
     @Override
     public void run() {
+        ServiceDispatcher.submitTask(new PcapCaptureTask(networkCard));
+
         ServiceDispatcher.submitTask(new SendHelloPacketTask(networkCard));
+
+        ServiceDispatcher.submitTask(new ScheduledPacketTask(networkCard));
     }
 }

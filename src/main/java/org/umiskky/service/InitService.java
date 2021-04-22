@@ -7,17 +7,23 @@ import org.umiskky.service.task.InitTask;
  * @version 0.0.1
  * @date 2021/04/19
  */
-public class InitService {
+public class InitService implements Runnable{
 
     public InitService() {
     }
 
-    public void initService(){
+    private void initService(){
         InitTask.importConfig();
         InitTask.initDatabase();
         InitTask.cleanDatabase();
         InitTask.initNetworkCards();
         InitTask.initEthernetTypeCode();
         InitTask.launchNetworkCardTasks();
+    }
+
+    @Override
+    public void run() {
+        initService();
+
     }
 }

@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
+import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.model.dao.UserDAO;
 import org.umiskky.service.InitService;
 
@@ -89,8 +90,7 @@ public class UserTest {
         userBox1.put(user2);
         userBox2.getAll();
 
-        InitService initService  = new InitService();
-        initService.initService();
+        ServiceDispatcher.submitTask(new InitService());
         User user000 = UserDAO.getUserById("8888888");
         System.out.println(user000.getLastUpdated());
     }
