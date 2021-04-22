@@ -175,4 +175,15 @@ public interface UserDAO {
         return 0;
     }
 
+    /**
+     * @description The method getAllUsers is used to get all users;
+     * @param
+     * @return java.util.List<org.umiskky.model.entity.User>
+     * @author umiskky
+     * @date 2021/4/22-9:15
+     */
+    static List<User> getAllUsers(){
+        return userBox.query().build().find();
+    }
+
 }

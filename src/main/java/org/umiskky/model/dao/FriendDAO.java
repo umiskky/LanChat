@@ -139,4 +139,15 @@ public interface FriendDAO {
             }
         });
     }
+
+    /**
+     * @description The method getAllFriends is used to get all friends.
+     * @param
+     * @return java.util.List<org.umiskky.model.entity.Friend>
+     * @author umiskky
+     * @date 2021/4/22-9:17
+     */
+    static List<Friend> getAllFriends(){
+        return friendBox.query().build().find();
+    }
 }

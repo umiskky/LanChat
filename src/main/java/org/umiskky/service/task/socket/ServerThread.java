@@ -1,7 +1,6 @@
 package org.umiskky.service.task.socket;
 
 import org.umiskky.service.task.socket.server.RequestProcessor;
-import org.umiskky.service.task.socket.utils.SystemFreePort;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,27 +8,28 @@ import java.net.Socket;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class ServerThread implements Runnable {
-    SystemFreePort systemFreePort = null;
-    private static int port = -1;
-    private static ServerSocket serverSocket;
-    private static ThreadPoolExecutor threadPoolExecutor;
+    private int port = -1;
+    private ServerSocket serverSocket;
+    private ThreadPoolExecutor threadPoolExecutor;
 
-    public ServerThread(ThreadPoolExecutor threadPoolExecutor) {
+    public ServerThread() {
+    }
+
+    public ServerThread(ThreadPoolExecutor threadPoolExecutor, int port) {
         this.threadPoolExecutor = threadPoolExecutor;
     }
 
-    public static int getPort() {
-        return port;
+    public void setPort(int port) {
+        this.port = port;
     }
 
+    public void setThreadPoolExecutor(ThreadPoolExecutor threadPoolExecutor) {
+        this.threadPoolExecutor = threadPoolExecutor;
+    }
 
     @Override
     public void run() {
         try {
-            while (port == -1) {
-                systemFreePort = new SystemFreePort();
-                port = systemFreePort.getPort();
-            }
             serverSocket = new ServerSocket(port);
             while (true) {
                 Socket socket = serverSocket.accept();

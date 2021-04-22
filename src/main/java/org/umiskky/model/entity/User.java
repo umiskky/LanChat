@@ -19,6 +19,7 @@ public class User {
     private String uuid;
     private String nickname;
     private String ipAddress;
+    private String linkLayerAddress;
     private int serverPort;
     private int avatarId;
     private Boolean status;
@@ -27,11 +28,12 @@ public class User {
     public User() {
     }
 
-    public User(long id, String uuid, String nickname, String ipAddress, int serverPort, int avatarId, Boolean status, long lastUpdated) {
+    public User(long id, String uuid, String nickname, String ipAddress, String linkLayerAddress, int serverPort, int avatarId, Boolean status, long lastUpdated) {
         this.id = id;
         this.uuid = uuid;
         this.nickname = nickname;
         this.ipAddress = ipAddress;
+        this.linkLayerAddress = linkLayerAddress;
         this.serverPort = serverPort;
         this.avatarId = avatarId;
         this.status = status;
@@ -100,5 +102,13 @@ public class User {
 
     public void setLastUpdated(long lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    public String getLinkLayerAddress() {
+        return linkLayerAddress;
+    }
+
+    public void setLinkLayerAddress(String linkLayerAddress) {
+        this.linkLayerAddress = linkLayerAddress;
     }
 }

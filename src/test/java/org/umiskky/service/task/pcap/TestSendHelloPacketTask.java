@@ -1,6 +1,7 @@
 package org.umiskky.service.task.pcap;
 
 import org.junit.Test;
+import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.service.InitService;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
 import org.umiskky.service.task.InitTask;
@@ -16,8 +17,7 @@ import java.util.ArrayList;
 public class TestSendHelloPacketTask {
     @Test
     public void testSendHelloPacketTask(){
-        InitService initService  = new InitService();
-        initService.initService();
+        ServiceDispatcher.submitTask(new InitService());
 
         ArrayList<NetworkCard> networkCards = new ArrayList<>(InitTask.networkCardsMapByName.values());
         System.out.println(networkCards);

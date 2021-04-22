@@ -37,6 +37,12 @@ public class SendHelloPacketTask implements Runnable {
     private final MacAddress dstMacAddress;
     private final HelloPacketTypeCode helloPacketTypeCode;
 
+    public SendHelloPacketTask() {
+        this.networkCard = InitTask.networkCardSelected;
+        this.dstMacAddress = MacAddress.ETHER_BROADCAST_ADDRESS;
+        this.helloPacketTypeCode = HelloPacketTypeCode.HELLO;
+    }
+
     public SendHelloPacketTask(NetworkCard networkCard) {
         this.networkCard = networkCard;
         this.dstMacAddress = MacAddress.ETHER_BROADCAST_ADDRESS;
@@ -64,7 +70,8 @@ public class SendHelloPacketTask implements Runnable {
         try {
                 helloBuilder
                         .avatarId(AvatarId.getInstance(localUser.getAvatarId()))
-                        .serverAddress((Inet4Address) InetAddress.getByName(localUser.getIpAddress().replace("/","")))
+//                        .serverAddress((Inet4Address) InetAddress.getByName(localUser.getIpAddress().replace("/","")))
+                        .serverAddress((Inet4Address) InetAddress.getByName(networkCard.getAddress().replace("/","")))
                         .serverPort(TcpPort.getInstance((short)localUser.getServerPort()))
                         .uuid(Uuid.getInstance(localUser.getUuid()))
                         .typeCode(helloPacketTypeCode)
