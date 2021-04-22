@@ -25,6 +25,7 @@ public class ScheduledPacketTask implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Socket_Server_Thread)");
         SendNotifyPacketTask sendNotifyPacketTask = new SendNotifyPacketTask(networkCard);
         ServiceDispatcher.submitTask(sendNotifyPacketTask);
     }

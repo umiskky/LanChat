@@ -44,6 +44,7 @@ public class ParseInviteToGroupPacketTask implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Parse_InviteToGroupPacket_Thread)");
         Group group = GroupDAO.getGroupById(packet.getHeader().getGroupUuid().getUuid());
         if(group == null){
             User user = UserDAO.getUserById(packet.getHeader().getSrcUuid().getUuid());

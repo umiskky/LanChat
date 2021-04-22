@@ -14,6 +14,7 @@ import org.umiskky.model.dao.LocalUserDAO;
 import org.umiskky.model.dao.UserDAO;
 import org.umiskky.model.entity.LocalUser;
 import org.umiskky.model.entity.MyObjectBox;
+import org.umiskky.service.ExitService;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
 import org.umiskky.service.pcaplib.networkcards.PcapNetworkCard;
 import org.umiskky.service.task.socket.ServerThread;
@@ -152,5 +153,9 @@ public class InitTask {
     public static void launchSocketServerTask(){
         ServerThread serverThread = new ServerThread();
         ServiceDispatcher.submitTask(serverThread);
+    }
+
+    public static void addShutdownHook(){
+        Runtime.getRuntime().addShutdownHook(new ExitService());
     }
 }

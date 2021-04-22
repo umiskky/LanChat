@@ -20,11 +20,12 @@ public class InitService implements Runnable{
         InitTask.initEthernetTypeCode();
         InitTask.launchNetworkCardTasks();
         InitTask.launchSocketServerTask();
+        InitTask.addShutdownHook();
     }
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Init_Service_Thread)");
         initService();
-
     }
 }

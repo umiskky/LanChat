@@ -3,11 +3,11 @@ package org.umiskky.factories;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapNativeException;
 import org.slf4j.Logger;
-import org.umiskky.service.ExitService;
 import org.umiskky.service.InitService;
 import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.NetworkCardTask;
 import org.umiskky.service.task.pcap.PacketParseDispatcher;
+import org.umiskky.service.task.pcap.PcapCaptureExTask;
 import org.umiskky.service.task.pcap.PcapCaptureTask;
 import org.umiskky.service.task.pcap.ScheduledPacketTask;
 import org.umiskky.service.task.pcap.parsetask.*;
@@ -158,13 +158,36 @@ public class ServiceDispatcher{
         ServiceDispatcher.viewModelFactory = viewModelFactory;
     }
 
+    /**
+     * @description The method closeAllThreadPools is used to close all thread pools.
+     * @param
+     * @return void
+     * @author umiskky
+     * @date 2021/4/22-21:50
+     */
+    public static void closeAllThreadPools(){
+        serviceThreadPoolExec.shutdown();
+        networkThreadPoolExec.shutdown();
+        pcapCaptureThreadPoolExec.shutdown();
+        pcapSenderThreadPoolExec.shutdown();
+        pcapScheduledThreadPoolExec.shutdown();
+        socketServerThreadPoolExec.shutdown();
+        socketClientThreadPoolExec.shutdown();
+        packetDispatcherThreadPoolExec.shutdown();
+        packetParserThreadPoolExec.shutdown();
+        socketParserThreadPoolExec.shutdown();
+        guiUpdateThreadPoolExec.shutdown();
+        databaseTaskThreadPoolExec.shutdown();
+        log.info("Close all thread pools.");
+    }
+
     public static void submitTask(InitService initService){
         serviceThreadPoolExec.execute(initService);
     }
 
-    public static void submitTask(ExitService exitService){
-        exitService.exitService();
-    }
+//    public static void submitTask(ExitService exitService){
+//        exitService.exitService();
+//    }
 
     public static void submitTask(SendHelloPacketTask sendHelloPacketTask){
         pcapSenderThreadPoolExec.execute(sendHelloPacketTask);
@@ -231,7 +254,22 @@ public class ServiceDispatcher{
             } catch (PcapNativeException | InterruptedException | NotOpenException e) {
                 log.error(e.getMessage());
             }
+            while(true){
+                if(Thread.currentThread().isInterrupted()){
+                    try {
+                        pcapCaptureTask.getHandle().breakLoop();
+                    } catch (NotOpenException e) {
+                        log.error(e.getMessage());
+                    }
+                    pcapCaptureTask.getHandle().close();
+                    break;
+                }
+            }
         });
+    }
+
+    public static void submitTask(PcapCaptureExTask pcapCaptureExTask){
+        pcapCaptureThreadPoolExec.execute(pcapCaptureExTask);
     }
 
     public static void submitTask(NetworkCardTask networkCardTask){

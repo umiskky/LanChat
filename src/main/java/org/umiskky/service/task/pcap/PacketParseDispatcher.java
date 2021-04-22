@@ -31,6 +31,7 @@ public class PacketParseDispatcher implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(PacketParse_Dispatcher_Thread)");
         EtherType etherType = ethernetPacket.getHeader().getType();
         if(etherType.equals(EtherType.getInstance((short) 0xAAA0))){
             ParseHelloPacketTask parseHelloPacketTask = new ParseHelloPacketTask(ethernetPacket, networkCard);

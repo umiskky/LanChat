@@ -37,6 +37,7 @@ public class ParseNotifyPacketTask implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Parse_NotifyPacket_Thread)");
         String uuid = packet.getHeader().getUuid().getUuid();
         long timestamp = packet.getHeader().getTimestamp().getTimestamp();
         FriendDAO.setStatus(uuid, timestamp);

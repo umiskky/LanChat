@@ -1,5 +1,6 @@
 package org.umiskky.service;
 
+import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.service.task.ExitTask;
 
 /**
@@ -7,12 +8,20 @@ import org.umiskky.service.task.ExitTask;
  * @version 0.0.1
  * @date 2021/04/19
  */
-public class ExitService {
+public class ExitService extends Thread{
 
     public ExitService() {
     }
 
-    public void exitService(){
+    private void exitService(){
         ExitTask.closeDatabase();
+        ServiceDispatcher.closeAllThreadPools();
     }
+
+    @Override
+    public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Exit_Service_Thread)");
+        exitService();
+    }
+
 }

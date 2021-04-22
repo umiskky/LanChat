@@ -44,6 +44,7 @@ public class SendInviteToGroupPacketTask implements Runnable {
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Send_InviteToGroupPacket_Thread)");
         PcapHandle handle = new SendNifBuilder(networkCard.getName()).build();
         LocalUser localUser = InitTask.localUser;
 

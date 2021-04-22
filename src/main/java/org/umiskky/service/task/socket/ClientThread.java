@@ -23,6 +23,7 @@ public class ClientThread  implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Socket_Client_Thread)");
         Socket clientSocket = null;
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;

@@ -1,5 +1,6 @@
 package org.umiskky.service.task.socket;
 
+import org.slf4j.Logger;
 import org.umiskky.service.task.socket.server.RequestProcessor;
 
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.net.Socket;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class ServerThread implements Runnable {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ServerThread.class);
     private int port = -1;
     private ServerSocket serverSocket;
     private ThreadPoolExecutor threadPoolExecutor;
@@ -29,15 +31,20 @@ public class ServerThread implements Runnable {
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Socket_Server_Thread)");
         try {
             serverSocket = new ServerSocket(port);
             while (true) {
+                if(Thread.currentThread().isInterrupted()){
+                    serverSocket.close();
+                    break;
+                }
                 Socket socket = serverSocket.accept();
                 System.out.println("客户:" + socket.getInetAddress().getHostAddress() + ":" + socket.getPort());
                 threadPoolExecutor.submit(new RequestProcessor(socket));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
 
