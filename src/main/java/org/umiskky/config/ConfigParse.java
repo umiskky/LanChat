@@ -28,6 +28,15 @@ public class ConfigParse {
         System.setProperty("org.pcap4j.packet.factory.properties", packetFactoryPath);
         Configurator.initialize("log4j2.xml", ConfigParse.class.getClassLoader(), log4j2Path);
         log.info("Relocate config files.");
+        initPropertiesBasedPacketFactory();
+    }
+
+    private static void initPropertiesBasedPacketFactory(){
+        System.setProperty("org.pcap4j.packet.Packet.classFor.org.pcap4j.packet.namednumber.EtherType.0xaaa0", "org.umiskky.service.pcaplib.packet.HelloPacket");
+        System.setProperty("org.pcap4j.packet.Packet.classFor.org.pcap4j.packet.namednumber.EtherType.0xaaa1", "org.umiskky.service.pcaplib.packet.MakeFriendsPacket");
+        System.setProperty("org.pcap4j.packet.Packet.classFor.org.pcap4j.packet.namednumber.EtherType.0xaaa2", "org.umiskky.service.pcaplib.packet.StatusAckPacket");
+        System.setProperty("org.pcap4j.packet.Packet.classFor.org.pcap4j.packet.namednumber.EtherType.0xaaa3", "org.umiskky.service.pcaplib.packet.InviteToGroupPacket");
+        System.setProperty("org.pcap4j.packet.Packet.classFor.org.pcap4j.packet.namednumber.EtherType.0xaaa4", "org.umiskky.service.pcaplib.packet.NotifyPacket");
     }
 
 }
