@@ -1,18 +1,16 @@
 package org.umiskky.view;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.Button;
 import org.umiskky.model.dao.MessageDAO;
 import org.umiskky.model.entity.Message;
-import org.umiskky.viewmodel.ChatViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 public class FriendListItem {
     private String msg;         //先表示一下
@@ -102,7 +100,7 @@ public class FriendListItem {
             ((Button)chatViewController.$("submit")).setDisable(false);
             ((ListView) chatViewController.$("chatList")).getItems().clear();
 
-            ArrayList<Message> messageslist = new ArrayList<>(MessageDAO.getMessages(Freuuid,Locuuid));
+            ArrayList<Message> messageslist = new ArrayList<>(MessageDAO.getMessages(Freuuid));
 
             for(int i = 0;i < messageslist.size();i ++){
                 if(messageslist.get(i).getFromUuid().equals(Freuuid)){
