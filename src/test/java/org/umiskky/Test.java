@@ -77,5 +77,6 @@ public class Test {
         System.out.println(0xFFFF & byte1);
 
         System.out.println(TcpPort.getInstance((short) 8888).valueAsInt());
+        System.out.println(IdUtil.simpleUUID());
     }
 }

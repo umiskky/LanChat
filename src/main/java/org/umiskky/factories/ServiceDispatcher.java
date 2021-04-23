@@ -3,6 +3,7 @@ package org.umiskky.factories;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapNativeException;
 import org.slf4j.Logger;
+import org.umiskky.debug.GenerateFakeDataTask;
 import org.umiskky.service.InitService;
 import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.NetworkCardTask;
@@ -12,6 +13,7 @@ import org.umiskky.service.task.pcap.PcapCaptureTask;
 import org.umiskky.service.task.pcap.ScheduledPacketTask;
 import org.umiskky.service.task.pcap.parsetask.*;
 import org.umiskky.service.task.pcap.sendtask.*;
+import org.umiskky.service.task.socket.ClientThread;
 import org.umiskky.service.task.socket.ServerThread;
 
 import java.io.IOException;
@@ -185,10 +187,6 @@ public class ServiceDispatcher{
         serviceThreadPoolExec.execute(initService);
     }
 
-//    public static void submitTask(ExitService exitService){
-//        exitService.exitService();
-//    }
-
     public static void submitTask(SendHelloPacketTask sendHelloPacketTask){
         pcapSenderThreadPoolExec.execute(sendHelloPacketTask);
     }
@@ -280,5 +278,20 @@ public class ServiceDispatcher{
         serverThread.setPort(InitTask.localUser.getServerPort());
         serverThread.setThreadPoolExecutor(socketParserThreadPoolExec);
         socketServerThreadPoolExec.execute(serverThread);
+    }
+
+    public static void submitTask(ClientThread clientThread){
+        socketServerThreadPoolExec.execute(clientThread);
+    }
+
+    /**
+     * @description The method submitTask is used to generate the fake data for testing.
+     * @param generateFakeDataTask
+     * @return void
+     * @author umiskky
+     * @date 2021/4/22-23:48
+     */
+    public static void submitTask(GenerateFakeDataTask generateFakeDataTask){
+        serviceThreadPoolExec.execute(generateFakeDataTask);
     }
 }

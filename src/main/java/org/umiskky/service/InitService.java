@@ -1,5 +1,7 @@
 package org.umiskky.service;
 
+import org.umiskky.debug.GenerateFakeDataTask;
+import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.service.task.InitTask;
 
 /**
@@ -27,5 +29,8 @@ public class InitService implements Runnable{
     public void run() {
         Thread.currentThread().setName(Thread.currentThread().getName() + "(Init_Service_Thread)");
         initService();
+
+        //Generate fake data for testing
+        ServiceDispatcher.submitTask(new GenerateFakeDataTask());
     }
 }

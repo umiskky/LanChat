@@ -102,8 +102,12 @@ public class InitTask {
      * @date 2021/4/19-23:25
      */
     public static void initNetworkCards(){
-        networkCardsMapByName = (HashMap<String, NetworkCard>) PcapNetworkCard.getAllNetworkCards().get("networkCardsMapByName");
-        networkCardsMapByLinkLayerAddr = (HashMap<String, NetworkCard>) PcapNetworkCard.getAllNetworkCards().get("networkCardsMapByLinkLayerAddr");
+        try {
+            networkCardsMapByName = (HashMap<String, NetworkCard>) PcapNetworkCard.getAllNetworkCards().get("networkCardsMapByName");
+            networkCardsMapByLinkLayerAddr = (HashMap<String, NetworkCard>) PcapNetworkCard.getAllNetworkCards().get("networkCardsMapByLinkLayerAddr");
+        }catch (NullPointerException e){
+            log.error(e.getMessage());
+        }
     }
 
     /**
@@ -155,6 +159,13 @@ public class InitTask {
         ServiceDispatcher.submitTask(serverThread);
     }
 
+    /**
+     * @description The method addShutdownHook is used to add shutdown hook.
+     * @param
+     * @return void
+     * @author umiskky
+     * @date 2021/4/22-23:29
+     */
     public static void addShutdownHook(){
         Runtime.getRuntime().addShutdownHook(new ExitService());
     }
