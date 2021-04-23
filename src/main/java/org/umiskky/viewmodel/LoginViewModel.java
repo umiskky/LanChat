@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.umiskky.factories.ViewModelFactory;
 import org.umiskky.model.DataModel;
@@ -90,6 +91,7 @@ public class LoginViewModel {
             chatViewController.init(viewModelFactory1.getChatViewModel());
             Stage chat = new Stage();
             chat.setTitle("LANChat");
+            chat.initStyle(StageStyle.UNDECORATED);
             Scene scene = new Scene(root);
             chat.setScene(scene);
             chat.show();

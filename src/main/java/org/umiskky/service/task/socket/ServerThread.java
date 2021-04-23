@@ -34,13 +34,14 @@ public class ServerThread implements Runnable {
         Thread.currentThread().setName(Thread.currentThread().getName() + "(Socket_Server_Thread)");
         try {
             serverSocket = new ServerSocket(port);
+            log.info("Start socket server.");
             while (true) {
                 if(Thread.currentThread().isInterrupted()){
                     serverSocket.close();
                     break;
                 }
                 Socket socket = serverSocket.accept();
-                System.out.println("客户:" + socket.getInetAddress().getHostAddress() + ":" + socket.getPort());
+                log.info("客户:" + socket.getInetAddress().getHostAddress() + ":" + socket.getPort());
                 threadPoolExecutor.submit(new RequestProcessor(socket));
             }
         } catch (IOException e) {
