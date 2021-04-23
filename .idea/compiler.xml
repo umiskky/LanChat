@@ -7,7 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <option name="objectbox.modelPath" value="E:\workspace\IDEA\LanChat/src/main/java/org/umiskky/model/schemas/default.json" />
+        <option name="objectbox.modelPath" value="D:\WorkSpace\Idea\LanChat/src/main/java/org/umiskky/model/schemas/default.json" />
         <processor name="io.objectbox.processor.ObjectBoxProcessorShim" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/io/objectbox/objectbox-processor/2.9.1/objectbox-processor-2.9.1.jar" />
@@ -32,10 +32,13 @@
         <module name="LanChat" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="LanChat" target="15" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="LanChat" options="-Aobjectbox.modelPath=E:\workspace\IDEA\LanChat/src/main/java/org/umiskky/model/schemas/default.json" />
+      <module name="LanChat" options="-Aobjectbox.modelPath=D:\WorkSpace\Idea\LanChat/src/main/java/org/umiskky/model/schemas/default.json" />
     </option>
   </component>
 </project>

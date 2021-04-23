@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.umiskky.view.ChatViewController;
 import org.umiskky.view.LoginViewController;
 
@@ -25,6 +26,7 @@ public class ViewHandler {
     }
 
     public void start() throws Exception{
+        stage.initStyle(StageStyle.UNDECORATED);
         openView("Login");
     }
 
