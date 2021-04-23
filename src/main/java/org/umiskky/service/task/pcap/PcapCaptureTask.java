@@ -10,6 +10,7 @@ import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
 import org.umiskky.service.pcaplib.pnif.CaptureNifBuilder;
 import org.umiskky.service.task.InitTask;
+import org.umiskky.service.task.pcap.sendtask.SendHelloPacketTask;
 
 /**
  * @author umiskky
@@ -59,7 +60,10 @@ public class PcapCaptureTask{
 
                     NetworkCard networkCard = InitTask.networkCardsMapByLinkLayerAddr.get(ethernetPacket.getHeader().getDstAddr().toString());
                     if(networkCard != null){
-                        InitTask.networkCardSelected = networkCard;
+                        if(InitTask.networkCardSelected == null){
+                            InitTask.networkCardSelected = networkCard;
+                        }
+                        ServiceDispatcher.submitTask(new SendHelloPacketTask(networkCard));
                     }
 
                 }

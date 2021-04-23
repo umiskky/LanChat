@@ -31,6 +31,7 @@ public class SendNotifyPacketTask implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Send_NotifyPacket_Thread)");
         PcapHandle handle = new SendNifBuilder(networkCard.getName()).build();
         LocalUser localUser = InitTask.localUser;
 

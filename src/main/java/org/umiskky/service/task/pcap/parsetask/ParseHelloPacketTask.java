@@ -43,6 +43,7 @@ public class ParseHelloPacketTask implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Parse_HelloPacket_Thread)");
         User user = new User();
         user.setLinkLayerAddress(ethernetPacket.getHeader().getSrcAddr().toString());
         user.setUuid(packet.getHeader().getUuid().getUuid());

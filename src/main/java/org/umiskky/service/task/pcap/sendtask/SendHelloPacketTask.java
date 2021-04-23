@@ -57,6 +57,7 @@ public class SendHelloPacketTask implements Runnable {
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Send_HelloPacket_Thread)");
         PcapHandle handle = new SendNifBuilder(networkCard.getName()).build();
         LocalUser localUser = InitTask.localUser;
 

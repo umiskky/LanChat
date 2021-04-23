@@ -43,6 +43,7 @@ public class ParseMakeFriendsPacketTask implements Runnable{
 
     @Override
     public void run() {
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Parse_MakeFriendsPacket_Thread)");
         User user = UserDAO.getUserById(packet.getHeader().getUuid().getUuid());
         if(user == null){
             SendHelloPacketTask sendHelloPacketTask = new SendHelloPacketTask(networkCard, ethernetPacket.getHeader().getSrcAddr(), HelloPacketTypeCode.HELLOREQUEST);

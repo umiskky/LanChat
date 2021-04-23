@@ -30,7 +30,7 @@ public class ParseStatusAckPacketTask implements Runnable{
 
     @Override
     public void run() {
-
+        Thread.currentThread().setName(Thread.currentThread().getName() + "(Parse_StatusAckPacket_Thread)");
         StatusAckPacketAuthorityCode authorityCode = packet.getHeader().getAuthorityCode();
 
         if(StatusAckPacketAuthorityCode.FRIEND_SUCCESS.equals(authorityCode)){
