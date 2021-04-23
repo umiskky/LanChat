@@ -22,8 +22,10 @@ public class Message implements Cloneable{
     @Id
     private long id;
     @Index
+    private String sessionId;
+
     private String fromUuid;
-    @Index
+
     private String toUuid;
 
     private long sendTime;
@@ -33,8 +35,9 @@ public class Message implements Cloneable{
     public Message() {
     }
 
-    public Message(long id, String fromUuid, String toUuid, long sendTime, String message) {
+    public Message(long id, String sessionId,String fromUuid, String toUuid, long sendTime, String message) {
         this.id = id;
+        this.sessionId = sessionId;
         this.fromUuid = fromUuid;
         this.toUuid = toUuid;
         this.sendTime = sendTime;
@@ -79,6 +82,14 @@ public class Message implements Cloneable{
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     /**

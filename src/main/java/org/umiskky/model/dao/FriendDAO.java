@@ -21,6 +21,20 @@ public interface FriendDAO {
     Box<Friend> friendBox = InitTask.store.boxFor(Friend.class);
 
     /**
+     * @description The method removeAll is used to remove all objects in Friend Entity.
+     * @param
+     * @return void
+     * @author umiskky
+     * @date 2021/4/23-19:23
+     */
+    static void removeAll(){
+        InitTask.store.runInTx(()->{
+            friendBox.removeAll();
+            log.info("Database Handle: Remove all friends!");
+        });
+    };
+
+    /**
      * @description The method resetStatus is used to set all Friend objects status to false.
      * @param
      * @return void

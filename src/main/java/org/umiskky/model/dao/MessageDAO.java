@@ -20,6 +20,20 @@ public interface MessageDAO {
     Box<Message> messageBox = InitTask.store.boxFor(Message.class);
 
     /**
+     * @description The method removeAll is used to remove all objects in Message Entity.
+     * @param
+     * @return void
+     * @author umiskky
+     * @date 2021/4/23-19:24
+     */
+    static void removeAll(){
+        InitTask.store.runInTx(()->{
+            messageBox.removeAll();
+            log.info("Database Handle: Remove all users!");
+        });
+    };
+
+    /**
      * @description The method putMessage is used to put a message to the database.
      * @param
      * @return void
@@ -38,17 +52,12 @@ public interface MessageDAO {
 
     /**
      * @description The method getMessages is used to get messages belong to two friends or group.
-     * @param uuid0
-     * @param uuid1
+     * @param sessionId
      * @return java.util.List<org.umiskky.model.entity.Message>
      * @author umiskky
      * @date 2021/4/22-12:50
      */
-    static List<Message> getMessages(String uuid0, String uuid1){
-        return messageBox.query()
-                .equal(Message_.fromUuid, uuid0).equal(Message_.toUuid, uuid1)
-                .or()
-                .equal(Message_.fromUuid, uuid1).equal(Message_.toUuid, uuid0)
-                .order(Message_.sendTime).build().find();
+    static List<Message> getMessages(String sessionId){
+        return messageBox.query().equal(Message_.sessionId, sessionId).order(Message_.sendTime).build().find();
     }
 }

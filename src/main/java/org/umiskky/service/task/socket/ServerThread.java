@@ -19,6 +19,7 @@ public class ServerThread implements Runnable {
 
     public ServerThread(ThreadPoolExecutor threadPoolExecutor, int port) {
         this.threadPoolExecutor = threadPoolExecutor;
+        this.port = port;
     }
 
     public void setPort(int port) {

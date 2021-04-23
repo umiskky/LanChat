@@ -39,6 +39,7 @@ public class GenerateFakeDataTask implements Runnable{
     }
 
     private void generateUsers(){
+        UserDAO.removeAll();
         User user1 = new User(0, "tee001", "tee001", "10.0.0.1", "00-00-00-00-00-01", 8888, 0, true, 0);
         User user2 = new User(0, "tee002", "tee002", "10.0.0.2", "00-00-00-00-00-02", 8888, 1, false, 0);
         User user3 = new User(0, "tee003", "tee003", "10.0.0.3", "00-00-00-00-00-03", 8888, 2, false, 0);
@@ -51,6 +52,7 @@ public class GenerateFakeDataTask implements Runnable{
     }
 
     private void generateFriends(){
+        FriendDAO.removeAll();
         Friend friend1 = new Friend(0, "umiskky1", "umiskky1", "abcdefg", 3, "10.0.1.1", 8888, "umiskky".getBytes(), true, Instant.now().toEpochMilli());
         Friend friend2 = new Friend(0, "umiskky2", "umiskky2", "abcdefg", 4, "10.0.1.2", 8888, "umiskky".getBytes(), false, Instant.now().toEpochMilli());
         FriendDAO.putFriend(friend1);
@@ -59,15 +61,16 @@ public class GenerateFakeDataTask implements Runnable{
     }
 
     private void generateMessage(){
-        Message message1 = new Message(0, "umiskky1", "dae21dc726f34992b69ae0fba3ae0081", 100, "不要摸鱼，好好干活！");
-        Message message2 = new Message(0, "umiskky1", "dae21dc726f34992b69ae0fba3ae0081", 150, "不然扣你这个月的工资！");
-        Message message3 = new Message(0, "dae21dc726f34992b69ae0fba3ae0081", "umiskky1", 200, "好的老板，马上做！");
-        Message message4 = new Message(0, "umiskky1", "dae21dc726f34992b69ae0fba3ae0081", 250, "下次注意，搞快一点，最近时间比较紧张。");
-        Message message5 = new Message(0, "dae21dc726f34992b69ae0fba3ae0081", "umiskky2", 110, "摸鱼被老板发现了，怎么办？");
-        Message message6 = new Message(0, "umiskky2", "dae21dc726f34992b69ae0fba3ae0081", 120, "啊，这。。");
-        Message message7 = new Message(0, "dae21dc726f34992b69ae0fba3ae0081", "umiskky2", 160, "完了，老板要扣我工资QAQ");
-        Message message8 = new Message(0, "umiskky2", "dae21dc726f34992b69ae0fba3ae0081", 180, "不要怂，跟老板说不干了，回家种地！");
-        Message message9 = new Message(0, "dae21dc726f34992b69ae0fba3ae0081", "umiskky2", 200, "啊，这。。");
+        MessageDAO.removeAll();
+        Message message1 = new Message(0, "umiskky1", "umiskky1", "dae21dc726f34992b69ae0fba3ae0081", 100000000, "不要摸鱼，好好干活！");
+        Message message2 = new Message(0, "umiskky1", "umiskky1", "dae21dc726f34992b69ae0fba3ae0081", 150000000, "不然扣你这个月的工资！");
+        Message message3 = new Message(0, "umiskky1", "dae21dc726f34992b69ae0fba3ae0081", "umiskky1", 200000000, "好的老板，马上做！");
+        Message message4 = new Message(0, "umiskky1", "umiskky1", "dae21dc726f34992b69ae0fba3ae0081", 250000000, "下次注意，搞快一点，最近时间比较紧张。");
+        Message message5 = new Message(0, "umiskky2", "dae21dc726f34992b69ae0fba3ae0081", "umiskky2", 110000000, "摸鱼被老板发现了，怎么办？");
+        Message message6 = new Message(0, "umiskky2", "umiskky2", "dae21dc726f34992b69ae0fba3ae0081", 120000000, "啊，这。。");
+        Message message7 = new Message(0, "umiskky2", "dae21dc726f34992b69ae0fba3ae0081", "umiskky2", 160000000, "完了，老板要扣我工资QAQ");
+        Message message8 = new Message(0, "umiskky2", "umiskky2", "dae21dc726f34992b69ae0fba3ae0081", 180000000, "不要怂，跟老板说不干了，回家种地！");
+        Message message9 = new Message(0, "umiskky2", "dae21dc726f34992b69ae0fba3ae0081", "umiskky2", 200000000, "啊，这。。");
         MessageDAO.putMessage(message1);
         MessageDAO.putMessage(message2);
         MessageDAO.putMessage(message3);
