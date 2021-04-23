@@ -4,11 +4,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ListView;
 import org.umiskky.model.DataModel;
+import org.umiskky.model.dao.FriendDAO;
+import org.umiskky.model.dao.UserDAO;
+import org.umiskky.model.entity.Friend;
+import org.umiskky.model.entity.User;
 import org.umiskky.view.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * @author umiskky
@@ -18,10 +20,7 @@ import java.util.Vector;
 public class ChatViewModel {
     private StringProperty chattext;
     private DataModel dataModel;
-    private Map<String, Vector<String>> friendMap = new HashMap<>();
-    private Vector<String> friendInfo = new Vector<>();
-    private Map<String, Vector<String>> userMap = new HashMap<>();
-    private Vector<String> userInfo = new Vector<>();
+
 
     public ChatViewModel(DataModel dataModel) {
         this.dataModel = dataModel;
@@ -37,41 +36,37 @@ public class ChatViewModel {
     }
 
     public void switchSelectFriend(ChatViewController chatViewController,ListView friendList){
-        friendList.getItems().clear();
-        for(Map.Entry<String,Vector<String>> entry : friendMap.entrySet()){
-            String inhead = entry.getValue().get(0);
-            String account = entry.getValue().get(1);
-            String instatus = entry.getValue().get(2);
-            String uuid = entry.getValue().get(3);
-            Boolean status = false;
+        ArrayList<Friend> friendlist = new ArrayList<>(FriendDAO.getAllFriends());
+        if(friendlist.isEmpty() == false){
+            friendList.getItems().clear();
+            for(int i = 0;i < friendlist.size();i ++){
+                Boolean status = friendlist.get(i).getStatus();
+                String inhead = Integer.toString(friendlist.get(i).getAvatarId());
+                String account = friendlist.get(i).getNickname();
+                String uuid = friendlist.get(i).getUuid();
 
-            if(instatus.equals("true")) {
-                status = true;
-            }else if(instatus.equals("false")){
-                status = false;
+                FriendListItem newFriend = new FriendListItem(inhead,account,status,uuid);
+                newFriend.setActionForSendMsg(chatViewController,uuid,chatViewController.getLocuuid());
+                friendList.getItems().add(newFriend.getPane());
             }
-            FriendListItem newFriend = new FriendListItem(inhead,account,status,uuid);
-            newFriend.setActionForSendMsg(chatViewController,uuid);
-            friendList.getItems().add(newFriend);
         }
+
     }
 
     public void switchSelectUser(ChatViewController chatViewController,ListView friendList){
-        friendList.getItems().clear();
-        for(Map.Entry<String,Vector<String>> entry : userMap.entrySet()){
-            String inhead = entry.getValue().get(0);
-            String account = entry.getValue().get(1);
-            String instatus = entry.getValue().get(2);
-            String uuid = entry.getValue().get(3);
-            Boolean status = false;
+        ArrayList<User> userList = new ArrayList<>(UserDAO.getAllUsers());
+        if(userList.isEmpty() == false){
+            friendList.getItems().clear();
+            for(int i = 0;i < userList.size();i ++){
+                Boolean status = userList.get(i).getStatus();
+                String inhead = Integer.toString(userList.get(i).getAvatarId());
+                String account = userList.get(i).getNickname();
+                String uuid = userList.get(i).getUuid();
 
-            if(instatus.equals("true")){
-                status = true;
+                UserListItem newUser = new UserListItem(inhead, account, status, uuid);
+                newUser.setActionForAddFriend(chatViewController, uuid);
+                friendList.getItems().add(newUser.getPane());
             }
-
-            UserListItem newUser = new UserListItem(inhead,account,status,uuid);
-            newUser.setActionForAddFriend(chatViewController,uuid);
-            friendList.getItems().add(newUser);
 
         }
     }

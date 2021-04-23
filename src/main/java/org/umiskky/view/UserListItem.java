@@ -16,6 +16,7 @@ public class UserListItem {
     private Button status;
     private Button chosen;
 
+
     public UserListItem(String inhead,String account,Boolean instatus,String uuid){
         pane = new Pane();
         head = new Button();
@@ -23,11 +24,11 @@ public class UserListItem {
         status = new Button();
         chosen = new Button();
 
-        pane.setPrefSize(220,40);
+        pane.setPrefSize(200,40);
         pane.getStyleClass().add("ListItem");
         status.setPrefSize(10,10);
         status.setLayoutX(42);
-        status.setLayoutY(28);
+        status.setLayoutY(25);
         status.getStyleClass().add("outline");
         head.setPrefSize(30,30);
         head.setLayoutX(5);
@@ -48,10 +49,15 @@ public class UserListItem {
         setHead(inhead);
         setName(account);
         setUuid(uuid);
+
+    }
+
+    public Pane getPane(){
+        return pane;
     }
 
     private void setHead(String inhead) {
-        this.head.setStyle(String.format("-fx-background-image: url('/View/Fxml/CSS/Image/head/%s.jpg')",inhead));
+        this.head.setStyle(String.format("-fx-background-image: url('/org/umiskky/view/Image/head/%s.jpg')",inhead));
         this.head.setStyle("-fx-background-size: 30px 30px");
         userHead = inhead;
     }

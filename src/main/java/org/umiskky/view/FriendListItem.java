@@ -5,8 +5,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
+import org.umiskky.model.dao.MessageDAO;
+import org.umiskky.model.entity.Message;
 import org.umiskky.viewmodel.ChatViewModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -37,7 +40,7 @@ public class FriendListItem {
         pane.getStyleClass().add("ListItem");
         status.setPrefSize(10,10);
         status.setLayoutX(42);
-        status.setLayoutY(28);
+        status.setLayoutY(25);
         status.getStyleClass().add("outline");
         head.setPrefSize(30,30);
         head.setLayoutX(5);
@@ -61,8 +64,12 @@ public class FriendListItem {
 
     }
 
+    public Pane getPane(){
+        return pane;
+    }
+
     private void setHead(String inhead) {
-        this.head.setStyle(String.format("-fx-background-image: url('/View/Fxml/CSS/Image/head/%s.jpg')",inhead));
+        this.head.setStyle(String.format("-fx-background-image: url('/org/umiskky/view/Image/head/%s.jpg')",inhead));
         this.head.setStyle("-fx-background-size: 30px 30px");
         friendHead = inhead;
     }
@@ -86,24 +93,23 @@ public class FriendListItem {
         status.getStyleClass().add("outline");
     }
 
-    public void setActionForSendMsg(ChatViewController chatViewController,String Uuid){
+    public void setActionForSendMsg(ChatViewController chatViewController,String Freuuid,String Locuuid){
         chosen.setOnAction((e) -> {
             //String friendAccount = friendName;
 
             ((Label) chatViewController.$("F_account")).setText(name.getText());
-            ((TextArea)chatViewController.$("chettext")).setDisable(false);
+            ((TextArea)chatViewController.$("chattext")).setDisable(false);
             ((Button)chatViewController.$("submit")).setDisable(false);
-            ((ListView) chatViewController.$("ChatList")).getItems().clear();
-            //创建一个Map存储uuid对应聊天记录
-            //对应的聊天记录使用vactor来存储
-            MsgMap.put(Uuid,msg);
+            ((ListView) chatViewController.$("chatList")).getItems().clear();
 
-            for(Map.Entry<String,String> entry : MsgMap.entrySet()){
-                if(entry.getKey().equals(friendUuid)){
-                    chatViewController.addLeft(friendHead,entry.getValue());
+            ArrayList<Message> messageslist = new ArrayList<>(MessageDAO.getMessages(Freuuid,Locuuid));
+
+            for(int i = 0;i < messageslist.size();i ++){
+                if(messageslist.get(i).getFromUuid().equals(Freuuid)){
+                    chatViewController.addLeft(friendHead,messageslist.get(i).getMessage());
                 }
                 else{
-                    chatViewController.addRight(LoginViewController.headid, entry.getValue());
+                    chatViewController.addRight(LoginViewController.headid, messageslist.get(i).getMessage());
                 }
             }
 

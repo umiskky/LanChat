@@ -43,7 +43,7 @@ public class ViewHandler {
                 break;
             case "Chat":
                 ChatViewController chatViewController = loader.getController();
-                chatViewController.init(viewModelFactory.getChatViewModel());
+                chatViewController.init(viewModelFactory.getChatViewModel(),root);
                 stage.setTitle("Chat");
                 break;
             default:

@@ -8,7 +8,12 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
+import org.umiskky.model.dao.FriendDAO;
+import org.umiskky.model.dao.LocalUserDAO;
+import org.umiskky.model.entity.Friend;
 import org.umiskky.viewmodel.ChatViewModel;
+
+import java.util.ArrayList;
 
 /**
  * @author umiskky
@@ -18,8 +23,8 @@ import org.umiskky.viewmodel.ChatViewModel;
 @Getter
 public class ChatViewController {
     private ChatViewModel chatViewModel;
-    //private static Friend[] FList;
     private Parent root;
+    private String locuuid;
 
     @FXML
     private Button headPortraitChat;
@@ -42,9 +47,11 @@ public class ChatViewController {
      * @author Tee
      * @apiNote this method is used to initialize
      */
-    public void init(ChatViewModel chatViewModel) {
+    public void init(ChatViewModel chatViewModel,Parent root) {
+        this.root = root;
         this.chatViewModel = chatViewModel;
-        headPortraitChat.setStyle(String.format("-fx-background-image: url('org/umiskky/view/Image/head/%s.jpg')", LoginViewController.headid));
+        this.locuuid = LocalUserDAO.getLocalUser().getUuid();
+        headPortraitChat.setStyle(String.format("-fx-background-image: url('/org/umiskky/view/Image/head/%s.jpg')", LoginViewController.headid));
         chattext.setDisable(true);
         submit.setDisable(true);
         addListener();
@@ -64,9 +71,9 @@ public class ChatViewController {
         quit.setTooltip(new Tooltip("退出"));
         quit.setOnAction((e) -> chatViewModel.quit());
 
-        chatSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectFriend(this,this.friendList));
+        chatSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectFriend(this , this.friendList));
 
-        friendSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectUser(this,this.friendList));
+        friendSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectUser(this , this.friendList));
 
         submit.setOnMouseClicked((e) -> chatViewModel.submit(this.chatList));
 
@@ -77,11 +84,20 @@ public class ChatViewController {
      * @apiNote this method is used to initialize the friendList when the first login
      */
     public void friendListInit(){
-        //for(int i = 0;i < FList.length;i ++){
-        //    FriendListItem newFriend = new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus(),FList[i].getUuid());
-        //    newFriend.setActionForSendMsg(this,FList[i].getUuid());
-        //    friendList.getItems().add(newFriend);
-        //}
+        ArrayList<Friend> friendlist = new ArrayList<>(FriendDAO.getAllFriends());
+        if(friendlist.isEmpty() == false){
+            friendList.getItems().clear();
+            for(int i = 0;i < friendlist.size();i ++){
+                Boolean status = friendlist.get(i).getStatus();
+                String inhead = Integer.toString(friendlist.get(i).getAvatarId());
+                String account = friendlist.get(i).getNickname();
+                String uuid = friendlist.get(i).getUuid();
+
+                FriendListItem newFriend = new FriendListItem(inhead,account,status,uuid);
+                newFriend.setActionForSendMsg(this,uuid,locuuid);
+                friendList.getItems().add(newFriend.getPane());
+            }
+        }
     }
 
     /**
@@ -110,6 +126,10 @@ public class ChatViewController {
      */
     public void addRight(String head,String Msg){
         chatList.getItems().add(new ChatListItem().Right(head,Msg,Tool.getWidth(Msg),Tool.getHight(Msg)));
+    }
+
+    public String getLocuuid(){
+        return this.locuuid;
     }
 
 }

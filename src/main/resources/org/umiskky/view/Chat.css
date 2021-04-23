@@ -13,7 +13,7 @@
     -fx-background-size: 40px 40px;
     -fx-background-color:transparent;
     -fx-background-position: center center;
-    -fx-background-image: url("org/umiskky/view/Image/head/1.jpg");
+    -fx-background-image: url('/org/umiskky/view/Image/head/1.jpg');
 }
 /*设置按钮*/
 #settings
@@ -63,8 +63,8 @@
     -fx-background-color: transparent;
     -fx-background-radius: 0px;
     -fx-border-style: none;
-    -fx-background-image: url("org/umiskky/view/Image/icon/outline.png");
-    -fx-background-size: 15px 15px;
+    -fx-background-image: url('/org/umiskky/view/Image/icon/outline.png');
+    -fx-background-size: 10px 10px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
@@ -74,8 +74,8 @@
     -fx-background-color: transparent;
     -fx-background-radius: 0px;
     -fx-border-style: none;
-    -fx-background-image: url("org/umiskky/view/Image/icon/online.png");
-    -fx-background-size: 15px 15px;
+    -fx-background-image: url('/org/umiskky/view/Image/icon/online.png');
+    -fx-background-size: 10px 10px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
@@ -137,7 +137,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 20px 20px;
     -fx-background-color: rgba(255,255,255,0);
-    -fx-background-image: url("org/umiskky/view/Image/head/0.jpg");
+    -fx-background-image: url('/org/umiskky/view/Image/head/0.jpg');
     -fx-cursor: hand;
     -fx-border-width: 1px;
     -fx-border-radius: 1px;
@@ -165,7 +165,7 @@
 }
 
 .leftarrow{
-    -fx-background-image: url("org/umiskky/view/Image/icon/left.png");
+    -fx-background-image: url('/org/umiskky/view/Image/icon/left.png');
     -fx-background-size: 5px 5px;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
@@ -186,7 +186,7 @@
 }
 
 .rightarrow{
-    -fx-background-image: url("org/umiskky/view/Image/icon/right.png");
+    -fx-background-image: url('/org/umiskky/view/Image/icon/right.png');
     -fx-background-size: 5px 5px;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;

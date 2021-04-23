@@ -82,9 +82,9 @@
                         </VBox>
                      </children></HBox>
                    <VBox alignment="TOP_CENTER" prefHeight="525.0" prefWidth="220.0">
-<!--                       <ListView fx:id="friendList" id="friendList" prefHeight="525.0" prefWidth="220.0">-->
+                       <ListView fx:id="friendList" id="friendList" prefHeight="525.0" prefWidth="220.0">
 
-<!--                       </ListView>-->
+                       </ListView>
 
                    </VBox>
                </children>

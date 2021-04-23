@@ -87,7 +87,7 @@ public class LoginViewModel {
             loader.setLocation(LoginViewModel.class.getResource("/org/umiskky/view/" + "ChatView.fxml"));
             Parent root = loader.load();
             ChatViewController chatViewController = loader.getController();
-            chatViewController.init(viewModelFactory1.getChatViewModel());
+            chatViewController.init(viewModelFactory1.getChatViewModel(),root);
             Stage chat = new Stage();
             chat.setTitle("LANChat");
             Scene scene = new Scene(root);
