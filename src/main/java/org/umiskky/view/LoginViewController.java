@@ -38,7 +38,6 @@ public class LoginViewController {
     public void init(LoginViewModel loginViewModel) {
         this.loginViewModel = loginViewModel;
         //networkCardSelectorInit();
-        //tableInit();
         headid = "0";
         headPortrait.setStyle(String.format("-fx-background-image: url('org/umiskky/view/Image/head/%s.jpg')",headid));
         bindInit();

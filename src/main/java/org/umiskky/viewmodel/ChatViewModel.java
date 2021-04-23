@@ -36,7 +36,7 @@ public class ChatViewModel {
         System.exit(0);
     }
 
-    public void switchSelectFriend(ListView friendList){
+    public void switchSelectFriend(ChatViewController chatViewController,ListView friendList){
         friendList.getItems().clear();
         for(Map.Entry<String,Vector<String>> entry : friendMap.entrySet()){
             String inhead = entry.getValue().get(0);
@@ -51,12 +51,12 @@ public class ChatViewModel {
                 status = false;
             }
             FriendListItem newFriend = new FriendListItem(inhead,account,status,uuid);
-            //newFriend.setActionForSendMsg();
+            newFriend.setActionForSendMsg(chatViewController,uuid);
             friendList.getItems().add(newFriend);
         }
     }
 
-    public void switchSelectUser(ListView friendList){
+    public void switchSelectUser(ChatViewController chatViewController,ListView friendList){
         friendList.getItems().clear();
         for(Map.Entry<String,Vector<String>> entry : userMap.entrySet()){
             String inhead = entry.getValue().get(0);
@@ -69,7 +69,9 @@ public class ChatViewModel {
                 status = true;
             }
 
-            friendList.getItems().add(new UserListItem(inhead,account,status,uuid));
+            UserListItem newUser = new UserListItem(inhead,account,status,uuid);
+            newUser.setActionForAddFriend(chatViewController,uuid);
+            friendList.getItems().add(newUser);
 
         }
     }

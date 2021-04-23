@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import lombok.Getter;
 import org.umiskky.viewmodel.ChatViewModel;
 
 /**
@@ -14,6 +15,7 @@ import org.umiskky.viewmodel.ChatViewModel;
  * @version 0.0.1
  * @date 2021/04/13
  */
+@Getter
 public class ChatViewController {
     private ChatViewModel chatViewModel;
     //private static Friend[] FList;
@@ -62,14 +64,18 @@ public class ChatViewController {
         quit.setTooltip(new Tooltip("退出"));
         quit.setOnAction((e) -> chatViewModel.quit());
 
-        chatSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectFriend(this.friendList));
+        chatSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectFriend(this,this.friendList));
 
-        friendSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectUser(this.friendList));
+        friendSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectUser(this,this.friendList));
 
         submit.setOnMouseClicked((e) -> chatViewModel.submit(this.chatList));
 
     }
 
+    /**
+     * @author Tee
+     * @apiNote this method is used to initialize the friendList when the first login
+     */
     public void friendListInit(){
         //for(int i = 0;i < FList.length;i ++){
         //    FriendListItem newFriend = new FriendListItem(Integer.toString(FList[i].getAvatarId()),FList[i].getNickname(),FList[i].getStatus(),FList[i].getUuid());
@@ -78,14 +84,30 @@ public class ChatViewController {
         //}
     }
 
+    /**
+     * @author Tee
+     * @apiNote this method is used to get the elements by the id and the type
+     */
     public Object $(String id) {
         return (Object) root.lookup("#" + id);
     }
 
+    /**
+     * @author Tee
+     * @apiNote this method is used to add the msg of the friend to the chatList
+     * @param head
+     * @param Msg
+     */
     public void addLeft(String head,String Msg){
         chatList.getItems().add(new ChatListItem().Left(head,Msg, Tool.getWidth(Msg),Tool.getHight(Msg)));
     }
 
+    /**
+     * @author Tee
+     * @apiNote this method is used to add the msg of me to the chatList
+     * @param head
+     * @param Msg
+     */
     public void addRight(String head,String Msg){
         chatList.getItems().add(new ChatListItem().Right(head,Msg,Tool.getWidth(Msg),Tool.getHight(Msg)));
     }
