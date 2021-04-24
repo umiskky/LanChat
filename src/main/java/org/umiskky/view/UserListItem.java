@@ -1,11 +1,24 @@
 package org.umiskky.view;
 
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import org.pcap4j.util.MacAddress;
+import org.slf4j.Logger;
+import org.umiskky.factories.ServiceDispatcher;
+import org.umiskky.model.dao.ApplyDAO;
+import org.umiskky.model.dao.UserDAO;
+import org.umiskky.model.entity.Apply;
+import org.umiskky.model.entity.User;
+import org.umiskky.model.verification.UserVerification;
+import org.umiskky.service.pcaplib.packet.domain.Uuid;
+import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.pcap.sendtask.SendMakeFriendsPacketTask;
 
 public class UserListItem {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserListItem.class);
     private String userHead;
     private String userUuid;
     private String userName;
@@ -81,10 +94,29 @@ public class UserListItem {
         status.getStyleClass().add("outline");
     }
 
-    public void setActionForAddFriend(ChatViewController chatViewController,String uuid){
+    public void setActionForAddFriend(ChatViewController chatViewController, String uuid){
         chosen.setOnAction((e) -> {
-            //SendMakeFriendsPacketTask makeFriend = new SendMakeFriendsPacketTask();
+            User user = UserDAO.getUserById(uuid);
+            if(UserVerification.isValidUser(user) && user.getStatus()){
+                byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
+                Apply apply = new Apply();
+                apply.setUuid(user.getUuid());
+                apply.setKey(key);
+                apply.setGroupUuid(Uuid.invalidUuid.getUuid());
+                apply.setIsGroup(Boolean.FALSE);
+                ApplyDAO.putApply(apply);
+                log.debug("Add new Apply.\n" + apply);
 
+                SendMakeFriendsPacketTask sendMakeFriendsPacketTask = new SendMakeFriendsPacketTask(
+                        InitTask.networkCardSelected, MacAddress.getByName(user.getLinkLayerAddress()), key
+                );
+                ServiceDispatcher.submitTask(sendMakeFriendsPacketTask);
+
+            }else if(!UserVerification.isValidUser(user)){
+                log.error("Failed to add apply because an invalid user!");
+            }else if(!user.getStatus()){
+                log.error("Failed to add apply because the user is offline!");
+            }
 
         });
     }

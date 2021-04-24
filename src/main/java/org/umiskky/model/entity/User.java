@@ -22,8 +22,8 @@ public class User {
     private String linkLayerAddress;
     private int serverPort;
     private int avatarId;
-    private Boolean status;
-    private long lastUpdated;
+    private Boolean status = false;
+    private long lastUpdated = 0;
 
     public User() {
     }

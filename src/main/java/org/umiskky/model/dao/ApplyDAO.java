@@ -28,12 +28,14 @@ public interface ApplyDAO {
      */
     static void putApply(Apply apply){
         InitTask.store.runInTx(()->{
-            try {
-                applyBox.put(apply);
-            } catch (UniqueViolationException e){
-                log.debug(e.getMessage());
-                applyBox.remove(apply);
-                applyBox.put(apply);
+            if(ApplyDAO.getApply(apply) == null){
+                try {
+                    applyBox.put(apply);
+                } catch (UniqueViolationException e){
+                    log.debug(e.getMessage());
+                    applyBox.remove(apply);
+                    applyBox.put(apply);
+                }
             }
         });
     }

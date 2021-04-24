@@ -28,9 +28,9 @@ public class GroupMember {
 
     private int avatarId;
 
-    private Boolean status;
+    private Boolean status = false;
 
-    private long lastUpdated;
+    private long lastUpdated = 0;
 
     public GroupMember() {
     }

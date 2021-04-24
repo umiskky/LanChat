@@ -135,7 +135,7 @@ public class Message implements Cloneable{
     }
 
     @Override
-    protected Object clone(){
+    public Object clone(){
         Message message = null;
         try {
             message = (Message) super.clone();

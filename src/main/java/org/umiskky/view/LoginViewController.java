@@ -1,6 +1,7 @@
 package org.umiskky.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -14,6 +15,10 @@ import org.umiskky.viewmodel.LoginViewModel;
 public class LoginViewController {
     private LoginViewModel loginViewModel;
     public static String headid;
+
+    private Parent root;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     @FXML
     private Button quit;
@@ -35,7 +40,8 @@ public class LoginViewController {
      * @author Tee
      * @apiNote this method is the initial process
      */
-    public void init(LoginViewModel loginViewModel) {
+    public void init(LoginViewModel loginViewModel, Parent root) {
+        this.root = root;
         this.loginViewModel = loginViewModel;
         //networkCardSelectorInit();
         headid = "0";
@@ -60,6 +66,15 @@ public class LoginViewController {
      *          Button login -> 跳转到聊天室
      */
     public void addListener(){
+        root.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+            root.getScene().getWindow().setX(event.getScreenX() - xOffset);
+            root.getScene().getWindow().setY(event.getScreenY() - yOffset);
+        });
+
         quit.setTooltip(new Tooltip("退出"));
         quit.setOnAction((e) -> LoginViewModel.quit());
 

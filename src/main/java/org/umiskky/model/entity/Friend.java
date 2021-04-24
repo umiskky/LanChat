@@ -28,9 +28,9 @@ public class Friend {
 
     private byte[] key;
 
-    private Boolean status;
+    private Boolean status = false;
 
-    private long lastUpdated;
+    private long lastUpdated = 0;
 
     public Friend() {
     }

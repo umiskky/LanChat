@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<AnchorPane prefHeight="292.0" prefWidth="428.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.umiskky.view.LoginViewController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="292.0" prefWidth="428.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.umiskky.view.LoginViewController">
    <children>
       <!--退出按钮-->
-      <Button fx:id="quit" id="quit" layoutX="383.0" layoutY="14.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+      <Button id="quit" fx:id="quit" layoutX="383.0" layoutY="14.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
          <graphic>
             <FontIcon iconLiteral="fas-times" iconSize="20" />
          </graphic>
       </Button>
       <!--返回按钮-->
-      <Button fx:id="minimiser" id="minimiser" layoutX="338.0" layoutY="15.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+      <Button id="minimiser" fx:id="minimiser" layoutX="338.0" layoutY="15.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
          <graphic>
             <FontIcon iconLiteral="fas-window-minimize" iconSize="15" />
          </graphic>
@@ -28,16 +28,16 @@
          </font>
       </Label>
       <!--头像展示-->
-      <Button fx:id="headPortrait" id="HeadPortrait" layoutX="33.0" layoutY="79.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="125.0" />
+      <Button id="HeadPortrait" fx:id="headPortrait" layoutX="33.0" layoutY="79.0" mnemonicParsing="false" prefHeight="125.0" prefWidth="125.0" />
       <!--选择头像-->
-      <Button fx:id="chooseHead" id="ChooseHead" layoutX="64.0" layoutY="222.0" mnemonicParsing="false" text="选择头像" textFill="#f5f0f0">
+      <Button id="ChooseHead" fx:id="chooseHead" layoutX="64.0" layoutY="222.0" mnemonicParsing="false" text="选择头像" textFill="#f5f0f0">
 
          <effect>
             <DropShadow color="#0000009d" height="11.0" radius="5.0" width="11.0" />
          </effect>
       </Button>
       <!--用户名-->
-      <TextField fx:id="account" id="account" layoutX="214.0" layoutY="79.0" prefHeight="30.0" prefWidth="155.0">
+      <TextField id="account" fx:id="account" layoutX="214.0" layoutY="79.0" prefHeight="30.0" prefWidth="155.0">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -54,7 +54,7 @@
 <!--      <ChoiceBox fx:id="networkCardSelector" layoutX="214.0" layoutY="131.0" prefHeight="30.0" prefWidth="155.0">-->
 <!--      </ChoiceBox>-->
       <!--登陆按钮-->
-      <Button fx:id="login" id="login" layoutX="266.0" layoutY="197.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+      <Button id="login" fx:id="login" layoutX="266.0" layoutY="197.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
          <graphic>
             <FontIcon iconLiteral="far-hand-point-right" iconSize="25" />
          </graphic>

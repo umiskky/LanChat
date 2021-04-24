@@ -40,7 +40,7 @@ public class ViewHandler {
         switch (viewToOpen){
             case "Login":
                 LoginViewController loginViewController = loader.getController();
-                loginViewController.init(viewModelFactory.getLoginViewModel());
+                loginViewController.init(viewModelFactory.getLoginViewModel(), root);
                 stage.setTitle("Login");
                 break;
             case "Chat":

@@ -67,4 +67,17 @@ public class Apply {
     public void setKey(byte[] key) {
         this.key = key;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        String ls = System.getProperty("line.separator");
+
+        sb.append("[Apply]").append(ls);
+        sb.append("  Uuid: ").append(this.uuid).append(ls);
+        sb.append("  Group Uuid: ").append(this.groupUuid).append(ls);
+        sb.append("  Is Group: ").append(this.isGroup).append(ls);
+
+        return sb.toString();
+    }
 }

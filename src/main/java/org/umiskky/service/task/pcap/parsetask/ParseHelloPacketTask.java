@@ -13,6 +13,7 @@ import org.umiskky.service.pcaplib.utils.IpAddressTools;
 import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.pcap.sendtask.SendHelloPacketTask;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 /**
@@ -51,7 +52,8 @@ public class ParseHelloPacketTask implements Runnable{
         user.setServerPort(packet.getHeader().getServerPort().valueAsInt());
         user.setAvatarId(packet.getHeader().getAvatarId().getAvatarId());
         user.setLastUpdated(Instant.now().toEpochMilli());
-        user.setNickname(JSON.parseArray(packet.getPayload().toString()).getJSONObject(0).getString("nickname"));
+        user.setStatus(Boolean.TRUE);
+        user.setNickname(JSON.parseArray(new String(packet.getPayload().getRawData(), StandardCharsets.UTF_8)).getJSONObject(0).getString("nickname"));
         UserDAO.updateUser(user);
 
         log.debug("Update user.\n" + packet);

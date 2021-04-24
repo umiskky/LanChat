@@ -3,9 +3,9 @@ package org.umiskky.view;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
 import org.umiskky.model.dao.FriendDAO;
@@ -25,6 +25,8 @@ public class ChatViewController {
     private ChatViewModel chatViewModel;
     private Parent root;
     private String locuuid;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     @FXML
     private Button headPortraitChat;
@@ -68,6 +70,15 @@ public class ChatViewController {
      * @apiNote this method is used to add Listeners to the buttons
      */
     public void addListener(){
+        root.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+            root.getScene().getWindow().setX(event.getScreenX() - xOffset);
+            root.getScene().getWindow().setY(event.getScreenY() - yOffset);
+        });
+
         quit.setTooltip(new Tooltip("退出"));
         quit.setOnAction((e) -> chatViewModel.quit());
 
@@ -75,7 +86,10 @@ public class ChatViewController {
 
         friendSelect.setOnMouseClicked((e) -> chatViewModel.switchSelectUser(this , this.friendList));
 
-        submit.setOnMouseClicked((e) -> chatViewModel.submit(this.chatList));
+        submit.setOnMouseClicked((e) -> {
+            chatViewModel.submit(this.chatList);
+            chattext.clear();
+        });
 
     }
 
@@ -85,7 +99,7 @@ public class ChatViewController {
      */
     public void friendListInit(){
         ArrayList<Friend> friendlist = new ArrayList<>(FriendDAO.getAllFriends());
-        if(friendlist.isEmpty() == false){
+        if(!friendlist.isEmpty()){
             friendList.getItems().clear();
             for(int i = 0;i < friendlist.size();i ++){
                 Boolean status = friendlist.get(i).getStatus();
@@ -132,5 +146,8 @@ public class ChatViewController {
         return this.locuuid;
     }
 
+    public ChatViewModel getChatViewModel() {
+        return chatViewModel;
+    }
 }
 

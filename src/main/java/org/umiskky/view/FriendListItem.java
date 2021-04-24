@@ -100,6 +100,8 @@ public class FriendListItem {
             ((Button)chatViewController.$("submit")).setDisable(false);
             ((ListView) chatViewController.$("chatList")).getItems().clear();
 
+            chatViewController.getChatViewModel().setSessionId(Freuuid);
+
             ArrayList<Message> messageslist = new ArrayList<>(MessageDAO.getMessages(Freuuid));
 
             for(int i = 0;i < messageslist.size();i ++){
