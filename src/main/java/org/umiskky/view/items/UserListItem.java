@@ -1,4 +1,4 @@
-package org.umiskky.view;
+package org.umiskky.view.items;
 
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
@@ -9,13 +9,16 @@ import org.pcap4j.util.MacAddress;
 import org.slf4j.Logger;
 import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.model.dao.ApplyDAO;
+import org.umiskky.model.dao.FriendDAO;
 import org.umiskky.model.dao.UserDAO;
 import org.umiskky.model.entity.Apply;
+import org.umiskky.model.entity.Friend;
 import org.umiskky.model.entity.User;
 import org.umiskky.model.verification.UserVerification;
 import org.umiskky.service.pcaplib.packet.domain.Uuid;
 import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.pcap.sendtask.SendMakeFriendsPacketTask;
+import org.umiskky.view.ChatViewController;
 
 public class UserListItem {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserListItem.class);
@@ -59,7 +62,7 @@ public class UserListItem {
         if(instatus){
             setOnline();
         }
-        setHead(inhead);
+        head.setStyle(String.format("-fx-background-image: url('/org/umiskky/view/Image/head/%s.jpg')",inhead));
         setName(account);
         setUuid(uuid);
 
@@ -97,7 +100,8 @@ public class UserListItem {
     public void setActionForAddFriend(ChatViewController chatViewController, String uuid){
         chosen.setOnAction((e) -> {
             User user = UserDAO.getUserById(uuid);
-            if(UserVerification.isValidUser(user) && user.getStatus()){
+            Friend friend = FriendDAO.getFriendById(uuid);
+            if(UserVerification.isValidUser(user) && user.getStatus() && friend == null){
                 byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
                 Apply apply = new Apply();
                 apply.setUuid(user.getUuid());
@@ -116,6 +120,8 @@ public class UserListItem {
                 log.error("Failed to add apply because an invalid user!");
             }else if(!user.getStatus()){
                 log.error("Failed to add apply because the user is offline!");
+            }else if(friend != null){
+                log.info("Already be friend.\n" + friend);
             }
 
         });

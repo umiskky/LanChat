@@ -58,7 +58,7 @@ public class PcapCaptureTask{
                     ServiceDispatcher.submitTask(packetParseDispatcher);
                     log.debug("Capture a valid packet.\n" + ethernetPacket);
 
-                    NetworkCard networkCard = InitTask.networkCardsMapByLinkLayerAddr.get(ethernetPacket.getHeader().getDstAddr().toString());
+                    NetworkCard networkCard = InitTask.networkCardsMapByLinkLayerAddr.get(ethernetPacket.getHeader().getDstAddr().toString().toUpperCase());
                     if(networkCard != null){
                         if(InitTask.networkCardSelected == null){
                             InitTask.networkCardSelected = networkCard;

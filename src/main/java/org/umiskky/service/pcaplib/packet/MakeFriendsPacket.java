@@ -13,7 +13,7 @@ import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.pcap4j.util.ByteArrays.LONG_SIZE_IN_BYTES;
+import static org.pcap4j.util.ByteArrays.INET6_ADDRESS_SIZE_IN_BYTES;
 
 /**
  * @author umiskky
@@ -115,7 +115,7 @@ public final class MakeFriendsPacket extends AbstractPacket{
         private static final int SRC_UUID_OFFSET = 0;
         private static final int SRC_UUID_SIZE = 32;
         private static final int KEY_OFFSET = SRC_UUID_OFFSET + SRC_UUID_SIZE;
-        private static final int KEY_SIZE = LONG_SIZE_IN_BYTES;
+        private static final int KEY_SIZE = INET6_ADDRESS_SIZE_IN_BYTES;
 
         private static final int MAKE_FRIENDS_HEADER_SIZE = KEY_OFFSET + KEY_SIZE;
 

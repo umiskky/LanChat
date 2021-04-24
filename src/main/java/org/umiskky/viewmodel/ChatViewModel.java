@@ -15,7 +15,12 @@ import org.umiskky.model.entity.User;
 import org.umiskky.model.verification.FriendVerification;
 import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.socket.ClientThread;
-import org.umiskky.view.*;
+import org.umiskky.view.ChatViewController;
+import org.umiskky.view.LoginViewController;
+import org.umiskky.view.items.ChatListItem;
+import org.umiskky.view.items.FriendListItem;
+import org.umiskky.view.items.UserListItem;
+import org.umiskky.view.utils.Tool;
 
 import java.time.Instant;
 import java.util.ArrayList;

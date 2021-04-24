@@ -4,7 +4,6 @@ import cn.hutool.core.util.StrUtil;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Arrays;
 
 /**
  * @author umiskky
@@ -32,7 +31,7 @@ public class Uuid implements Serializable {
      * @date 2021/4/15-22:20
      */
     public static Uuid getInstance(byte[] uuid) {
-        return new Uuid(Arrays.toString(uuid));
+        return new Uuid(new String(uuid));
     }
 
     public static Uuid getInstance(String uuid) {

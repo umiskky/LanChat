@@ -1,4 +1,4 @@
-package org.umiskky.view;
+package org.umiskky.view.utils;
 
 public class Tool {
     public static double getWidth(String Msg){

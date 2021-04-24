@@ -1,4 +1,4 @@
-package org.umiskky.view;
+package org.umiskky.view.items;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,6 +7,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import org.umiskky.model.dao.MessageDAO;
 import org.umiskky.model.entity.Message;
+import org.umiskky.view.ChatViewController;
+import org.umiskky.view.LoginViewController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class FriendListItem {
     //private Button MsgTip;
     private Button status;
     private Button chosen;
-    private String friendHead;
+    public String friendHead;
     private String friendName;
     private String friendUuid;
 
@@ -56,7 +58,8 @@ public class FriendListItem {
         if(instatus){
             setOnline();
         }
-        setHead(inhead);
+        friendHead = inhead;
+        head.setStyle(String.format("-fx-background-image: url('/org/umiskky/view/Image/head/%s.jpg')",inhead));
         setName(account);
         setUuid(uuid);
 
@@ -91,7 +94,7 @@ public class FriendListItem {
         status.getStyleClass().add("outline");
     }
 
-    public void setActionForSendMsg(ChatViewController chatViewController,String Freuuid,String Locuuid){
+    public void setActionForSendMsg(ChatViewController chatViewController, String Freuuid, String Locuuid){
         chosen.setOnAction((e) -> {
             //String friendAccount = friendName;
 

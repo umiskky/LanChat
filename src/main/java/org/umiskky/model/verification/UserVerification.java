@@ -21,6 +21,7 @@ public class UserVerification {
         if(user == null){
             return false;
         }
+        System.out.println(user.getUuid());
         return user.getUuid().length()==UUID_LENGTH
                 && NetworkInterfaceVerification.isValidIpAddress(user.getIpAddress())
                 && NetworkInterfaceVerification.isValidIpPort(user.getServerPort())

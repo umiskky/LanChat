@@ -10,8 +10,10 @@ import org.umiskky.model.entity.User;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
 import org.umiskky.service.pcaplib.packet.MakeFriendsPacket;
 import org.umiskky.service.pcaplib.packet.namednumber.HelloPacketTypeCode;
+import org.umiskky.service.pcaplib.packet.namednumber.StatusAckPacketAuthorityCode;
 import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.pcap.sendtask.SendHelloPacketTask;
+import org.umiskky.service.task.pcap.sendtask.SendStatusAckPacketTask;
 
 import java.time.Instant;
 
@@ -50,17 +52,26 @@ public class ParseMakeFriendsPacketTask implements Runnable{
             ServiceDispatcher.submitTask(sendHelloPacketTask);
             log.debug("Miss user info!\n" + packet);
         }else{
-            Friend friend = new Friend();
-            friend.setUuid(user.getUuid());
-            friend.setNickname(user.getNickname());
-            friend.setAvatarId(user.getAvatarId());
-            friend.setIpAddress(user.getIpAddress());
-            friend.setServerPort(user.getServerPort());
-            friend.setStatus(Boolean.TRUE);
-            friend.setLastUpdated(Instant.now().toEpochMilli());
-            friend.setKey(packet.getHeader().getKey().getKey());
-            FriendDAO.putFriend(friend);
-            log.debug("Add friend.\n" + packet);
+            Friend friend = FriendDAO.getFriendById(user.getUuid());
+            if(friend == null){
+                friend = new Friend();
+                friend.setUuid(user.getUuid());
+                friend.setNickname(user.getNickname());
+                friend.setAvatarId(user.getAvatarId());
+                friend.setIpAddress(user.getIpAddress());
+                friend.setServerPort(user.getServerPort());
+                friend.setStatus(Boolean.TRUE);
+                friend.setLastUpdated(Instant.now().toEpochMilli());
+                friend.setKey(packet.getHeader().getKey().getKey());
+                FriendDAO.putFriend(friend);
+                log.debug("Add friend.\n" + packet);
+
+                SendStatusAckPacketTask sendStatusAckPacketTask = new SendStatusAckPacketTask(networkCard, ethernetPacket.getHeader().getSrcAddr(), StatusAckPacketAuthorityCode.FRIEND_SUCCESS);
+                ServiceDispatcher.submitTask(sendStatusAckPacketTask);
+            }else{
+                log.info("Already be friend.\n" + friend);
+            }
+
         }
     }
 }

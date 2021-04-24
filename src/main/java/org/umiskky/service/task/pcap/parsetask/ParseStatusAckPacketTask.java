@@ -46,16 +46,20 @@ public class ParseStatusAckPacketTask implements Runnable{
             ApplyDAO.removeApply(apply);
 
             User user = UserDAO.getUserById(packet.getHeader().getSrcUuid().getUuid());
-            friend.setUuid(user.getUuid());
-            friend.setNickname(user.getNickname());
-            friend.setAvatarId(user.getAvatarId());
-            friend.setIpAddress(user.getIpAddress());
-            friend.setServerPort(user.getServerPort());
-            friend.setStatus(Boolean.TRUE);
-            friend.setLastUpdated(Instant.now().toEpochMilli());
-            FriendDAO.putFriend(friend);
+            if(FriendDAO.getFriendById(user.getUuid()) == null){
+                friend.setUuid(user.getUuid());
+                friend.setNickname(user.getNickname());
+                friend.setAvatarId(user.getAvatarId());
+                friend.setIpAddress(user.getIpAddress());
+                friend.setServerPort(user.getServerPort());
+                friend.setStatus(Boolean.TRUE);
+                friend.setLastUpdated(Instant.now().toEpochMilli());
+                FriendDAO.putFriend(friend);
 
-            log.debug("Make friends success.\n" + packet);
+                log.debug("Make friends success.\n" + packet);
+            }else{
+                log.info("Already be friend.\n" + FriendDAO.getFriendById(user.getUuid()));
+            }
 
         }else if(StatusAckPacketAuthorityCode.GROUP_SUCCESS.equals(authorityCode)){
             Group group = GroupDAO.getGroupById(packet.getHeader().getGroupUuid().getUuid());

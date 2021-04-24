@@ -4,6 +4,9 @@ import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.annotation.Index;
 
+import java.time.Instant;
+import java.time.ZoneId;
+
 /**
  * @author umiskky
  * @version 0.0.1
@@ -126,5 +129,23 @@ public class Friend {
 
     public void setLastUpdated(long lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        String ls = System.getProperty("line.separator");
+
+        sb.append("[Friend]").append(ls);
+        sb.append("  Uuid: ").append(this.uuid).append(ls);
+        sb.append("  AvatarId: ").append(this.avatarId).append(ls);
+        sb.append("  Nickname: ").append(this.nickname).append(ls);
+        sb.append("  Ip address: ").append(this.ipAddress).append(ls);
+        sb.append("  Server port: ").append(this.serverPort).append(ls);
+        sb.append("  Key: ").append(this.key).append(ls);
+        sb.append("  Last updated: ").append(Instant.ofEpochMilli(this.lastUpdated).atZone(ZoneId.systemDefault())).append(ls);
+        sb.append("  Status: ").append(this.status).append(ls);
+
+        return sb.toString();
     }
 }

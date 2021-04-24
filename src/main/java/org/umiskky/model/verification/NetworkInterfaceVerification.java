@@ -55,7 +55,7 @@ public class NetworkInterfaceVerification {
      */
     public static Boolean isValidLinkLayerAddress(String linkLayerAddress){
         try {
-            MacAddress.getByAddress(linkLayerAddress.getBytes());
+            MacAddress.getByName(linkLayerAddress);
         } catch (IllegalArgumentException e){
             log.debug(e.getMessage());
             return false;

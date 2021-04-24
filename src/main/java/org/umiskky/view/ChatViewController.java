@@ -11,6 +11,9 @@ import lombok.Getter;
 import org.umiskky.model.dao.FriendDAO;
 import org.umiskky.model.dao.LocalUserDAO;
 import org.umiskky.model.entity.Friend;
+import org.umiskky.view.items.ChatListItem;
+import org.umiskky.view.items.FriendListItem;
+import org.umiskky.view.utils.Tool;
 import org.umiskky.viewmodel.ChatViewModel;
 
 import java.util.ArrayList;

@@ -62,7 +62,7 @@ public class SendMakeFriendsPacketTask implements Runnable{
 
         try {
             handle.sendPacket(packet);
-            log.debug("Send Make Friends Packet: " + packet.toString());
+            log.debug("Send Make Friends Packet: " + packet);
         } catch (PcapNativeException | NotOpenException e) {
             log.error(e.getMessage());
         }
