@@ -12,7 +12,6 @@ import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
 import org.umiskky.service.pcaplib.pnif.CaptureNifBuilder;
 import org.umiskky.service.task.InitTask;
-import org.umiskky.service.task.pcap.sendtask.SendHelloPacketTask;
 
 import java.io.EOFException;
 import java.util.concurrent.TimeoutException;
@@ -77,7 +76,6 @@ public class PcapCaptureExTask extends Thread{
                     NetworkCard networkCard = InitTask.networkCardsMapByLinkLayerAddr.get(ethernetPacket.getHeader().getDstAddr().toString().toUpperCase());
                     if(networkCard != null){
                         InitTask.networkCardSelected = networkCard;
-                        ServiceDispatcher.submitTask(new SendHelloPacketTask(networkCard));
                     }
                 }
             }else if(packet != null){

@@ -61,23 +61,22 @@ public class InitTask {
     public static void initDatabase(){
         store = MyObjectBox.builder().baseDirectory(new File(InitTask.class.getResource("/").getPath()+"org/umiskky/model/database/")).name("lan-chat-db").build();
         log.info("Init the database.");
-        store.runInTx(()->{
-            LocalUser tmpLocalUser = LocalUserDAO.getLocalUser();
-            if(tmpLocalUser == null) {
-                tmpLocalUser = new LocalUser();
-                tmpLocalUser.setUuid(IdUtil.simpleUUID());
-                tmpLocalUser.setKey(SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded());
-                LocalUserDAO.putLocalUser(tmpLocalUser);
-            }
-            localUser = LocalUserDAO.getLocalUser();
-            try {
-                localUser.setServerPort(new SystemFreePort().getAndReleasePort());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            localUser.setIpAddress("");
-            LocalUserDAO.putLocalUser(localUser);
-        });
+
+        LocalUser tmpLocalUser = LocalUserDAO.getLocalUser();
+        if(tmpLocalUser == null) {
+            tmpLocalUser = new LocalUser();
+            tmpLocalUser.setUuid(IdUtil.simpleUUID());
+            tmpLocalUser.setKey(SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded());
+        }
+        try {
+            tmpLocalUser.setServerPort(new SystemFreePort().getAndReleasePort());
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+        tmpLocalUser.setIpAddress("");
+        LocalUserDAO.putLocalUser(tmpLocalUser);
+        localUser = tmpLocalUser;
+
         log.info("Init the LocalUser.");
     }
 

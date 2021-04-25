@@ -8,6 +8,7 @@ import io.objectbox.annotation.Id;
 import io.objectbox.annotation.Index;
 import org.slf4j.Logger;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZoneId;
 
@@ -17,8 +18,10 @@ import java.time.ZoneId;
  * @date 2021/04/14
  */
 @Entity
-public class Message implements Cloneable{
+public class Message implements Cloneable, Serializable {
+    private static final long serialVersionUID = 666L;
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Message.class);
+
     @Id
     private long id;
     @Index

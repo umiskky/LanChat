@@ -16,7 +16,6 @@ import org.umiskky.model.entity.Friend;
 import org.umiskky.model.entity.User;
 import org.umiskky.model.verification.UserVerification;
 import org.umiskky.service.pcaplib.packet.domain.Uuid;
-import org.umiskky.service.task.InitTask;
 import org.umiskky.service.task.pcap.sendtask.SendMakeFriendsPacketTask;
 import org.umiskky.view.ChatViewController;
 
@@ -111,9 +110,7 @@ public class UserListItem {
                 ApplyDAO.putApply(apply);
                 log.debug("Add new Apply.\n" + apply);
 
-                SendMakeFriendsPacketTask sendMakeFriendsPacketTask = new SendMakeFriendsPacketTask(
-                        InitTask.networkCardSelected, MacAddress.getByName(user.getLinkLayerAddress()), key
-                );
+                SendMakeFriendsPacketTask sendMakeFriendsPacketTask = new SendMakeFriendsPacketTask(MacAddress.getByName(user.getLinkLayerAddress()), key);
                 ServiceDispatcher.submitTask(sendMakeFriendsPacketTask);
 
             }else if(!UserVerification.isValidUser(user)){

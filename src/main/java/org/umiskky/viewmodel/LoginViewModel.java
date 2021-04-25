@@ -9,10 +9,13 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
+import org.umiskky.factories.ServiceDispatcher;
 import org.umiskky.factories.ViewModelFactory;
 import org.umiskky.model.DataModel;
 import org.umiskky.model.dao.LocalUserDAO;
+import org.umiskky.model.entity.LocalUser;
 import org.umiskky.service.task.InitTask;
+import org.umiskky.service.task.pcap.sendtask.SendHelloPacketTask;
 import org.umiskky.view.ChatViewController;
 import org.umiskky.view.LoginViewController;
 
@@ -79,10 +82,23 @@ public class LoginViewModel {
      */
     public static void login(Button login){
         try {
-            InitTask.localUser.setNickname(account.get());
-            InitTask.localUser.setAvatarId(Integer.parseInt(LoginViewController.headid));
-            LocalUserDAO.putLocalUser(InitTask.localUser);
-
+            LocalUser tmpLocalUser = LocalUserDAO.getLocalUser();
+            if(tmpLocalUser == null){
+                log.info("Waiting fo init.");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage());
+                }
+            }
+            assert tmpLocalUser != null;
+            tmpLocalUser.setNickname(account.get());
+            tmpLocalUser.setAvatarId(Integer.parseInt(LoginViewController.headid));
+            LocalUserDAO.putLocalUser(tmpLocalUser);
+            InitTask.localUser = tmpLocalUser;
+            if(InitTask.networkCardSelected != null){
+                ServiceDispatcher.submitTask(new SendHelloPacketTask(InitTask.networkCardSelected));
+            }
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(LoginViewModel.class.getResource("/org/umiskky/view/" + "ChatView.fxml"));

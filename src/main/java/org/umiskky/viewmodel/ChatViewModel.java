@@ -53,16 +53,20 @@ public class ChatViewModel {
 
     public void switchSelectFriend(ChatViewController chatViewController,ListView friendList){
         ArrayList<Friend> friendlist = new ArrayList<>(FriendDAO.getAllFriends());
+        friendList.getItems().clear();
         if(!friendlist.isEmpty()){
-            friendList.getItems().clear();
-            for(int i = 0;i < friendlist.size();i ++){
-                Boolean status = friendlist.get(i).getStatus();
-                String inhead = Integer.toString(friendlist.get(i).getAvatarId());
-                String account = friendlist.get(i).getNickname();
-                String uuid = friendlist.get(i).getUuid();
 
-                FriendListItem newFriend = new FriendListItem(inhead,account,status,uuid);
-                newFriend.setActionForSendMsg(chatViewController,uuid,chatViewController.getLocuuid());
+            for (Friend friend : friendlist) {
+                Boolean status = friend.getStatus();
+                String inhead = Integer.toString(friend.getAvatarId());
+                String account = friend.getNickname();
+                String uuid = friend.getUuid();
+
+                if ("".equals(account)) {
+                    account = uuid;
+                }
+                FriendListItem newFriend = new FriendListItem(inhead, account, status, uuid);
+                newFriend.setActionForSendMsg(chatViewController, uuid, chatViewController.getLocuuid());
                 friendList.getItems().add(newFriend.getPane());
             }
         }
@@ -71,14 +75,18 @@ public class ChatViewModel {
 
     public void switchSelectUser(ChatViewController chatViewController,ListView friendList){
         ArrayList<User> userList = new ArrayList<>(UserDAO.getAllUsers());
-        if(userList.isEmpty() == false){
-            friendList.getItems().clear();
+        friendList.getItems().clear();
+        if(!userList.isEmpty()){
+
             for(int i = 0;i < userList.size();i ++){
                 Boolean status = userList.get(i).getStatus();
                 String inhead = Integer.toString(userList.get(i).getAvatarId());
                 String account = userList.get(i).getNickname();
                 String uuid = userList.get(i).getUuid();
 
+                if("".equals(account)){
+                    account = uuid;
+                }
                 UserListItem newUser = new UserListItem(inhead, account, status, uuid);
                 newUser.setActionForAddFriend(chatViewController, uuid);
                 friendList.getItems().add(newUser.getPane());
@@ -100,7 +108,7 @@ public class ChatViewModel {
 
             Message sendMsg = (Message) msg.clone();
             sendMsg.setSessionId(InitTask.localUser.getUuid());
-            sendMsg = Message.encryptMessage(sendMsg, friend.getKey());
+            Message.encryptMessage(sendMsg, friend.getKey());
             ClientThread clientThread = new ClientThread(friend.getIpAddress(), friend.getServerPort(), sendMsg);
             ServiceDispatcher.submitTask(clientThread);
             log.debug("Send a message.\n" + sendMsg);

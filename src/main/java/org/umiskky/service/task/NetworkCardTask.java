@@ -22,7 +22,7 @@ public class NetworkCardTask implements Runnable{
     @Override
     public void run() {
         Thread.currentThread().setName(Thread.currentThread().getName() + "(NetworkCard_Task_Thread)");
-//        ServiceDispatcher.submitTask(new PcapCaptureTask(networkCard));
+
         ServiceDispatcher.submitTask(new PcapCaptureExTask(networkCard));
 
         ServiceDispatcher.submitTask(new SendHelloPacketTask(networkCard));

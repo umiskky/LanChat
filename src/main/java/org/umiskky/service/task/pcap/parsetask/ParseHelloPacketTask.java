@@ -54,9 +54,12 @@ public class ParseHelloPacketTask implements Runnable{
         user.setLastUpdated(Instant.now().toEpochMilli());
         user.setStatus(Boolean.TRUE);
         user.setNickname(JSON.parseArray(new String(packet.getPayload().getRawData(), StandardCharsets.UTF_8)).getJSONObject(0).getString("nickname"));
-        UserDAO.updateUser(user);
 
-        log.debug("Update user.\n" + packet);
+        //ToDo: 测试性代码，需要重写...
+        if(user.getNickname() != null && !user.getNickname().isEmpty()){
+            UserDAO.updateUser(user);
+            log.debug("Update user.\n" + packet);
+        }
 
         if(HelloPacketTypeCode.HELLO.equals(typeCode)){
             SendHelloPacketTask sendHelloPacketTask = new SendHelloPacketTask(networkCard, ethernetPacket.getHeader().getSrcAddr(), HelloPacketTypeCode.HELLOACK);

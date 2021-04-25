@@ -39,6 +39,12 @@ public class SendMakeFriendsPacketTask implements Runnable{
         this.key = key;
     }
 
+    public SendMakeFriendsPacketTask(MacAddress dstMacAddress, byte[] key) {
+        this.networkCard = InitTask.networkCardSelected;
+        this.dstMacAddress = dstMacAddress;
+        this.key = key;
+    }
+
     @Override
     public void run() {
         Thread.currentThread().setName(Thread.currentThread().getName() + "(Send_MakeFriendsPacket_Thread)");

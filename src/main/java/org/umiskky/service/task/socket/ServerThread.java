@@ -48,7 +48,5 @@ public class ServerThread implements Runnable {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
-
-
     }
 }

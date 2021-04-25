@@ -110,6 +110,10 @@ public class ChatViewController {
                 String account = friendlist.get(i).getNickname();
                 String uuid = friendlist.get(i).getUuid();
 
+                if(account.equals("")){
+                    account = uuid;
+                }
+
                 FriendListItem newFriend = new FriendListItem(inhead,account,status,uuid);
                 newFriend.setActionForSendMsg(this,uuid,locuuid);
                 friendList.getItems().add(newFriend.getPane());

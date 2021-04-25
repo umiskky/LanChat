@@ -25,10 +25,7 @@ public interface LocalUserDAO {
      * @date 2021/4/19-23:35
      */
     static LocalUser getLocalUser(){
-        if(localUserBox.getAll().size() == 1){
-            return localUserBox.getAll().get(0);
-        }
-        return null;
+        return localUserBox.query().build().findUnique();
     }
 
     static LocalUser getLocalUserById(String uuid){

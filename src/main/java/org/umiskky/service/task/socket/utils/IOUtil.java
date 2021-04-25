@@ -1,18 +1,22 @@
 package org.umiskky.service.task.socket.utils;
 
+import org.slf4j.Logger;
+
 import java.io.*;
 
 /***
  * @apiNote IO流操作相关工具类
  */
 public class IOUtil {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(IOUtil.class);
+
     /** 关闭对象输入流 */
     public static void close(ObjectInputStream is){
         if(null != is){
             try {
                 is.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
     }
@@ -22,7 +26,7 @@ public class IOUtil {
             try {
                 os.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
     }
@@ -32,7 +36,7 @@ public class IOUtil {
             try {
                 is.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
     }
@@ -42,7 +46,7 @@ public class IOUtil {
             try {
                 os.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
     }

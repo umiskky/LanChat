@@ -55,6 +55,12 @@ public class SendHelloPacketTask implements Runnable {
         this.helloPacketTypeCode = helloPacketTypeCode;
     }
 
+    public SendHelloPacketTask(MacAddress dstMacAddress, HelloPacketTypeCode helloPacketTypeCode) {
+        this.networkCard = InitTask.networkCardSelected;
+        this.dstMacAddress = dstMacAddress;
+        this.helloPacketTypeCode = helloPacketTypeCode;
+    }
+
     @Override
     public void run() {
         Thread.currentThread().setName(Thread.currentThread().getName() + "(Send_HelloPacket_Thread)");
@@ -105,7 +111,7 @@ public class SendHelloPacketTask implements Runnable {
             } else {
                 string = "Unknown Hello Packet";
             }
-            log.debug(string + packet.toString());
+            log.debug(string + packet);
         } catch (PcapNativeException | NotOpenException e) {
             log.error(e.getMessage());
         }
