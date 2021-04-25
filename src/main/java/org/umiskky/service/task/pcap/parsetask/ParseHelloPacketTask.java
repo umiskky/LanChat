@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import org.pcap4j.packet.EthernetPacket;
 import org.slf4j.Logger;
 import org.umiskky.factories.ServiceDispatcher;
+import org.umiskky.model.dao.FriendDAO;
 import org.umiskky.model.dao.UserDAO;
+import org.umiskky.model.entity.Friend;
 import org.umiskky.model.entity.User;
 import org.umiskky.service.pcaplib.networkcards.NetworkCard;
 import org.umiskky.service.pcaplib.packet.HelloPacket;
@@ -59,6 +61,17 @@ public class ParseHelloPacketTask implements Runnable{
         if(user.getNickname() != null && !user.getNickname().isEmpty()){
             UserDAO.updateUser(user);
             log.debug("Update user.\n" + packet);
+        }
+
+        Friend friend = FriendDAO.getFriendById(packet.getHeader().getUuid().getUuid());
+        if(friend != null){
+            friend.setNickname(user.getNickname());
+            friend.setAvatarId(user.getAvatarId());
+            friend.setIpAddress(user.getIpAddress());
+            friend.setServerPort(user.getServerPort());
+            friend.setStatus(Boolean.TRUE);
+            friend.setLastUpdated(Instant.now().toEpochMilli());
+            FriendDAO.updateFriend(friend);
         }
 
         if(HelloPacketTypeCode.HELLO.equals(typeCode)){

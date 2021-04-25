@@ -277,11 +277,13 @@ public class ServiceDispatcher{
     public static void submitTask(ServerThread serverThread){
         serverThread.setPort(InitTask.localUser.getServerPort());
         serverThread.setThreadPoolExecutor(socketParserThreadPoolExec);
+        log.info("Port:" + InitTask.localUser.getServerPort());
+        log.info("IP:" + InitTask.localUser.getIpAddress());
         socketServerThreadPoolExec.execute(serverThread);
     }
 
     public static void submitTask(ClientThread clientThread){
-        socketServerThreadPoolExec.execute(clientThread);
+        socketClientThreadPoolExec.execute(clientThread);
     }
 
     /**

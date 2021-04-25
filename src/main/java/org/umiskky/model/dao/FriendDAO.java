@@ -164,4 +164,24 @@ public interface FriendDAO {
     static List<Friend> getAllFriends(){
         return friendBox.query().build().find();
     }
+
+
+    /**
+     * @description The method updateFriend is used to update friend info.
+     * @param friend
+     * @return void
+     * @author umiskky
+     * @date 2021/4/25-14:56
+     */
+    static void updateFriend(Friend friend){
+        Friend oldFriend = friendBox.query().equal(Friend_.uuid, friend.getUuid()).build().findUnique();
+        if(oldFriend != null){
+            friend.setKey(oldFriend.getKey());
+            friend.setId(oldFriend.getId());
+            InitTask.store.runInTx(()->{
+                friendBox.put(friend);
+                log.info("Update friend info.");
+            });
+        }
+    }
 }
